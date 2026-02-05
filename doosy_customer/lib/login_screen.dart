@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'bottom_nav.dart';
+import 'home_screen.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -16,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
           onTap: () {
             Navigator.of(context).pop();
           },
-          child: Icon(Icons.arrow_back_ios),
+          child: const Icon(Icons.arrow_back_ios),
         ),
       ),
       body: Padding(
@@ -25,33 +28,33 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
 
           children: [
-            Text(
+            const Text(
               "Log In",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(color: Color.fromRGBO(0, 217, 174, 1)),
+                  borderSide: const BorderSide(color: Color.fromRGBO(0, 217, 174, 1)),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(color: Color.fromRGBO(0, 217, 174, 1)),
+                  borderSide: const BorderSide(color: Color.fromRGBO(0, 217, 174, 1)),
                 ),
                 labelText: 'Phone',
-                labelStyle: TextStyle(color: Colors.grey),
-                focusColor: Color.fromRGBO(0, 217, 174, 1),
+                labelStyle: const TextStyle(color: Colors.grey),
+                focusColor: const Color.fromRGBO(0, 217, 174, 1),
               ),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Row(
               children: [
                 TextButton(
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     "Click Here for email Log In",
                     style: TextStyle(
                       decoration: TextDecoration.underline,
@@ -61,10 +64,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 TextButton(
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     "Forgot Password",
                     style: TextStyle(
                       decoration: TextDecoration.underline,
@@ -76,21 +79,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             GestureDetector(
               onTap: () {
-                //   Navigator.of(
-                //     context,
-                //   ).push(MaterialPageRoute(builder: (builder) => LoginScreen()));
+                  Navigator.of(
+                    context,
+                  ).push(MaterialPageRoute(builder: (builder) => const BottomNav()));
               },
               child: Container(
                 height: 50,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Color.fromRGBO(0, 217, 174, 1),
+                  color: const Color.fromRGBO(0, 217, 174, 1),
                 ),
-                child: Center(
+                child: const Center(
                   child: Text(
                     "LOG IN",
                     style: TextStyle(
@@ -102,14 +105,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            Align(
+            const SizedBox(height: 20),
+            const Align(
               child: Text(
                 "Or Log In using social media",
                 style: TextStyle(fontSize: 15, color: Colors.grey),
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Row(
               children: [
                 Container(
@@ -118,31 +121,31 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
-                      BoxShadow(
+                      const BoxShadow(
                         blurRadius: 5,
                         spreadRadius: 0.7,
                         offset: Offset(0, 2),
                         color: Colors.grey,
                       ),
                     ],
-                    color: Color.fromRGBO(0, 127, 255, 1),
+                    color: const Color.fromRGBO(0, 127, 255, 1),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset("assets/facebook.png"),
-                      SizedBox(width: 5),
-                      Text("Facebook", style: TextStyle(color: Colors.white)),
+                      const SizedBox(width: 5),
+                      const Text("Facebook", style: TextStyle(color: Colors.white)),
                     ],
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Container(
                   height: 50,
                   width: 150,
                   decoration: BoxDecoration(
                     boxShadow: [
-                      BoxShadow(
+                      const BoxShadow(
                         blurRadius: 5,
                         spreadRadius: 0.7,
                         offset: Offset(0, 2),
@@ -150,14 +153,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                     borderRadius: BorderRadius.circular(12),
-                    color: Color.fromRGBO(255, 255, 255, 1),
+                    color: const Color.fromRGBO(255, 255, 255, 1),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset("assets/google-icon.png"),
-                      SizedBox(width: 5),
-                      Text(
+                      const SizedBox(width: 5),
+                      const Text(
                         "Google",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
@@ -166,11 +169,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Center(
               child: TextButton(
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   "Guest user",
                   style: TextStyle(
                     decoration: TextDecoration.underline,
@@ -180,13 +183,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 80),
+            const SizedBox(height: 80),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
                   onPressed: () {},
-                  child: Row(
+                  child: const Row(
                     children: [
                       Text(
                         "Don’t have an account?",
@@ -208,6 +211,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             ),
+
           ],
         ),
       ),

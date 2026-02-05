@@ -1,3 +1,4 @@
+import 'package:doosy_customer/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'onboaring.dart';
@@ -12,7 +13,7 @@ class Myapp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: OnBoarding(),
+      home: SplashScreen(),
     );
   }
 }
