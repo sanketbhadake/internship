@@ -2,6 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import 'helper/custom_widget.dart';
+import 'location_search.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -11,7 +14,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final PageController _controller = PageController();
+  final slrcolor = Color(0xff00D9AE);
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      openBottomSheet();
+    });
+  }
 
   final List<Map<String, dynamic>> categories = [
     {"name": "Grocery", "image": "assets/grocery.png"},
@@ -27,93 +39,285 @@ class _HomeScreenState extends State<HomeScreen> {
     {"name": "Grocery", "image": "assets/grocery.png"},
   ];
 
+  void openBottomSheet() {
+    showModalBottomSheet(
+      elevation: 1,
+      isScrollControlled: true,
+      context: context,
+      builder: (builder) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: Wrap(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset("assets/location.png"),
+                  SizedBox(height: 20),
+                  CustomText(
+                    text: "Device Location Off",
+                    fontSize: 22,
+                    weight: FontWeight.bold,
+                  ),
+                  SizedBox(height: 10),
+
+                  Center(
+                    child: CustomText(
+                      text:
+                          "Please Switch on your device location to find nearby provider services on the map.",
+                      fontSize: 14,
+                      isCenter: true,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  CustomButton(text: "ENABLE LOCATION"),
+                  SizedBox(height: 20),
+                  CustomText(
+                    text: "No Thanks",
+                    fontSize: 15,
+                    weight: FontWeight.bold,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final sizeHeight = MediaQuery.of(context).size.height;
     final sizeWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      body: Column(
-        children: [
-          Stack(
-            clipBehavior: Clip.none,
+      drawer: Drawer(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 100,
-                width: MediaQuery.of(context).size.width,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(14),
-                    bottomRight: Radius.circular(14),
+              Expanded(
+                child: ListTile(
+                  title: Text(
+                    "Sanket Bhadake",
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
                   ),
-                  color: Color.fromRGBO(0, 217, 174, 1),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(Icons.menu, color: Colors.white),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Your location",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Mumbai",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              Icon(
-                                Icons.keyboard_arrow_down_rounded,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Icon(Icons.shopping_bag, color: Colors.white),
-                    ],
+                  subtitle: Text(
+                    "sanketbhadake@gmail.com",
+                    style: TextStyle(color: Colors.black, fontSize: 12),
                   ),
                 ),
               ),
-              Positioned(
-                top: 80,
-                left: 40,
-                child: Container(
-                  height: 35,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                        spreadRadius: 2,
-                        blurRadius: 8,
-                        offset: Offset(0, 1),
-                        color: Colors.grey,
-                      ),
-                    ],
-                    color: Colors.white,
+              SizedBox(height: 30),
+              Expanded(
+                child: ListTile(
+                  title: Text(
+                    "Home",
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
                   ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search_sharp),
-                      border: InputBorder.none,
-                      hint: Text(
-                        "Search here",
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ),
+                  leading: Icon(Icons.home_filled, color: slrcolor),
+                ),
+              ),
+              Expanded(
+                child: ListTile(
+                  title: Text(
+                    "Order History",
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
                   ),
+                  leading: Icon(Icons.history, color: slrcolor),
+                ),
+              ),
+              Expanded(
+                child: ListTile(
+                  title: Text(
+                    "E-wallet",
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+                  ),
+                  leading: Icon(Icons.wallet, color: slrcolor),
+                ),
+              ),
+              Expanded(
+                child: ListTile(
+                  title: Text(
+                    "My Orders",
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+                  ),
+                  leading: Icon(Icons.shopping_cart, color: slrcolor),
+                ),
+              ),
+              Expanded(
+                child: ListTile(
+                  title: Text(
+                    "Terms & Condition",
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+                  ),
+                  leading: Icon(Icons.home, color: slrcolor),
+                ),
+              ),
+              Expanded(
+                child: ListTile(
+                  title: Text(
+                    "Notification",
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+                  ),
+                  leading: Icon(Icons.notifications, color: slrcolor),
+                ),
+              ),
+              Expanded(
+                child: ListTile(
+                  title: Text(
+                    "Tickets",
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+                  ),
+                  leading: Icon(
+                    Icons.airplane_ticket_outlined,
+                    color: slrcolor,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ListTile(
+                  title: Text(
+                    "About",
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+                  ),
+                  leading: Icon(Icons.info_outline, color: slrcolor),
+                ),
+              ),
+              Expanded(
+                child: ListTile(
+                  title: Text(
+                    "Rate App",
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+                  ),
+                  leading: Icon(Icons.star_border, color: slrcolor),
+                ),
+              ),
+              Expanded(
+                child: ListTile(
+                  title: Text(
+                    "Share App",
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+                  ),
+                  leading: Icon(Icons.share, color: slrcolor),
+                ),
+              ),
+              SizedBox(height: 30),
+
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  "Logout",
+                  style: TextStyle(fontSize: 15, color: slrcolor),
                 ),
               ),
             ],
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Padding(
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  height: 100,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(14),
+                      bottomRight: Radius.circular(14),
+                    ),
+                    color: Color.fromRGBO(0, 217, 174, 1),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Builder(
+                          builder: (context) {
+                            return GestureDetector(
+                              onTap: () {
+                                Scaffold.of(context).openDrawer();
+                              },
+                              child: Icon(Icons.menu, color: Colors.white),
+                            );
+                          },
+                        ),
+
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Your location",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            GestureDetector(
+                              onTap: (){
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LocationSearch()));
+                              },
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Mumbai",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Icon(Icons.shopping_bag, color: Colors.white),
+                      ],
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 80,
+                  left: 40,
+                  child: Container(
+                    height: 35,
+                    width: sizeWidth*0.8,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                          spreadRadius: 2,
+                          blurRadius: 8,
+                          offset: Offset(0, 1),
+                          color: Colors.grey,
+                        ),
+                      ],
+                      color: Colors.white,
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.search_sharp),
+                        border: InputBorder.none,
+                        hint: Text(
+                          "Search here",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -353,8 +557,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

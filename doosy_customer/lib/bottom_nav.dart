@@ -1,3 +1,4 @@
+import 'package:doosy_customer/validator.dart';
 import 'package:flutter/material.dart';
 
 import 'home_screen.dart';
@@ -12,7 +13,7 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   List<Widget> menu = [
     HomeScreen(),
-    HomeScreen(),
+    Validator(),
     HomeScreen(),
     HomeScreen(),
     HomeScreen(),
@@ -34,9 +35,13 @@ class _BottomNavState extends State<BottomNav> {
         ],
         currentIndex: _selectIndex,
         onTap: (index){
-          _selectIndex=index;
+          setState(() {
+            _selectIndex=index;
+          });
+
         },
       ),
+
     );
   }
 }
