@@ -1,7 +1,9 @@
-import 'package:actiday/ui/home/mobile/home_screen_mobile.dart';
+
 import 'package:actiday/ui/home/web/home_screen_web.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:flutter/material.dart';
+
+import 'mobile/home_Screen_mobile.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
