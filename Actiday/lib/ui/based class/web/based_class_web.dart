@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../framework/controller/based controller/bottom_list.dart';
-import '../../../utils/theme/app_colors.dart';
-import '../../../utils/widgets/common_text.dart';
+import '../../utils/theme/app_colors.dart';
+import '../../utils/widgets/common_text.dart';
 
 class BasedClassWeb extends StatefulWidget {
   const BasedClassWeb({super.key});
@@ -13,7 +13,9 @@ class BasedClassWeb extends StatefulWidget {
 }
 
 class _BasedClassWebState extends State<BasedClassWeb> {
-  late int lastItem=0;
+  late int lastItem = 0;
+  late int selectIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     final menuList = BottomList.bottomMenuList;
@@ -35,32 +37,19 @@ class _BasedClassWebState extends State<BasedClassWeb> {
             return InkWell(
               onTap: () {
                 setState(() {
-
-                  BottomList.bottomMenuList[lastItem].isSelect=false;
-                  data.isSelect=true;
-
+                  BottomList.bottomMenuList[lastItem].isSelect = false;
+                  data.isSelect = true;
+                  selectIndex = data.id;
                 });
-                lastItem=data.id;
-
-
+                lastItem = data.id;
               },
-              child:
-              CommonText(
+              child: CommonText(
                 text: data.name,
                 fontSize: data.isSelect ? 14 : 12,
                 weight: data.isSelect ? FontWeight.bold : FontWeight.normal,
               ),
             );
           }).toList(),
-          // [
-          //   CommonText(text: "Home", fontSize: 14),
-          //   SizedBox(width: 15),
-          //   CommonText(text: "Booking", fontSize: 14),
-          //   SizedBox(width: 15),
-          //   CommonText(text: "Explore", fontSize: 14),
-          //   SizedBox(width: 15),
-          //   CommonText(text: "Favourite", fontSize: 14),
-          // ],
         ),
         actions: [
           Padding(
@@ -71,28 +60,24 @@ class _BasedClassWebState extends State<BasedClassWeb> {
                 SizedBox(width: 15),
                 Icon(Icons.notifications_outlined),
                 SizedBox(width: 15),
-                CircleAvatar(radius: 15, backgroundColor: Colors.red),
+                CircleAvatar(
+                  radius: 20,
+
+                  backgroundColor: Colors.orange,
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Image.asset("assets/images/profile.png"),
+                  ),
+                ),
               ],
             ),
           ),
         ],
 
-        backgroundColor: appBarColor,
+        backgroundColor: AppColors.appBarColor,
         centerTitle: true,
       ),
-
-      //   Container(
-      //   height: 170,
-      //   width: sizeWidth,
-      //   color: Colors.black,
-      //   child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //     children: [
-      //       CommonText(text: "copyright © 2020-22 Dreamplug Technologies Pvt Ltd.", fontSize: 12,color: Colors.white,),
-      //       CommonText(text: "privacy policy | terms and conditions | returns and refund", fontSize: 12,color: Colors.white,),
-      //     ],
-      //   ),
-      // ),
+      body: menuList[selectIndex].screen,
     );
   }
 }

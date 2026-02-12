@@ -3,7 +3,8 @@ import 'package:actiday/ui/explore/explore.dart';
 import 'package:actiday/ui/favourite/favourite.dart';
 import 'package:actiday/ui/home/home_screen.dart';
 import 'package:flutter/material.dart';
-import '../../../utils/app_constant.dart';
+
+import '../../../ui/utils/app_enums.dart';
 import '../../repository/based model/model_class.dart';
 
 class BottomList {

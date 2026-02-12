@@ -1,7 +1,10 @@
 import 'package:actiday/framework/controller/based%20controller/bottom_list.dart';
+import 'package:actiday/ui/utils/theme/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../utils/widgets/common_text.dart';
+
+import '../../utils/widgets/common_text.dart';
+
 
 
 
@@ -22,7 +25,7 @@ class _BasedClassMobileState extends State<BasedClassMobile> {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.only(left: 20.0),
-          child: SvgPicture.asset("assets/svgs/category-2.svg"),
+          child: SvgPicture.asset(AppAssets.category),
         ),
         leadingWidth: 50,
         title: Row(

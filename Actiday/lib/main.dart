@@ -1,7 +1,6 @@
-import 'package:actiday/ui/based%20class/mobile/based_class_mobile.dart';
-import 'package:actiday/ui/based%20class/web/based_class_web.dart';
+import 'package:actiday/ui/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_builder/responsive_builder.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -21,14 +20,7 @@ class MyApp extends StatelessWidget {
               backgroundColor: Colors.white,
             )
         ),
-        home: ScreenTypeLayout.builder(
-          mobile: (BuildContext context) {
-            return BasedClassMobile();
-          },
-          desktop: (BuildContext context) {
-            return BasedClassWeb();
-          },
-        ),
+        home:  SplashScreen(),
     );
   }
 }

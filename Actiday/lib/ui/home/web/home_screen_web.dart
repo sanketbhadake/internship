@@ -1,9 +1,14 @@
+import 'package:actiday/ui/home/helper/top_classes.dart';
+import 'package:actiday/ui/utils/widgets/common_size.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../utils/theme/app_colors.dart';
-import '../../../utils/widgets/common_text.dart';
+import '../../utils/theme/app_assets.dart';
+import '../../utils/widgets/common_container.dart';
+import '../../utils/widgets/common_footer.dart';
+import '../../utils/widgets/common_text.dart';
 
 class HomeScreenWeb extends StatefulWidget {
   const HomeScreenWeb({super.key});
@@ -13,49 +18,178 @@ class HomeScreenWeb extends StatefulWidget {
 }
 
 class _HomeScreenWebState extends State<HomeScreenWeb> {
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    final sizeHeight=MediaQuery.of(context).size.height;
-    final sizeWidth=MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 80.0),
-          child: SvgPicture.asset("assets/svgs/logo black.svg", ),
-        ),
-        leadingWidth: 150,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-
+      body: SingleChildScrollView(
+        child: Column(
           children: [
-            CommonText(text: "Home", fontSize: 12),
-            SizedBox(width: 15),
-            CommonText(text: "Booking", fontSize: 12),
-            SizedBox(width: 15),
-            CommonText(text: "Explore", fontSize: 12),
-            SizedBox(width: 15),
-            CommonText(text: "Favourite", fontSize: 12),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 80.0,
+                vertical: 30,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // SizedBox(
+                  //   height: 100,
+                  //   width: 1000,
+                  //
+                  //   child: ListView.builder(
+                  //     scrollDirection: Axis.horizontal,
+                  //     shrinkWrap: true,
+                  //     itemCount: 3,
+                  //     itemBuilder: (context, index) => Padding(
+                  //       padding: const EdgeInsets.only(right: 15),
+                  //       child: CommonContainer(
+                  //         borderRadius: 13,
+                  //
+                  //         child: Image.asset( AppAssets.banner,fit: BoxFit.cover,),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  CarouselSlider(
+                    items: [
+                      CommonContainer(
+                        borderRadius: 13,
+
+                        child: Image.asset(AppAssets.banner, fit: BoxFit.cover),
+                      ),
+                      CommonContainer(
+                        borderRadius: 13,
+
+                        child: Image.asset(AppAssets.banner, fit: BoxFit.cover),
+                      ),
+                    ],
+                    options: CarouselOptions(
+                      height: 200,
+                      viewportFraction: 0.9,
+                      autoPlay: true,
+                      autoPlayCurve: Curves.easeInOut,
+                      enlargeCenterPage: true,
+                      animateToClosest: true,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _currentIndex = index;
+                        });
+                      },
+                    ),
+                  ),
+
+                  SizedBox(height: 10),
+                  Center(
+                    child: SmoothPageIndicator(
+                      controller: PageController(initialPage: _currentIndex),
+                      count: 2,
+                      effect: ExpandingDotsEffect(
+                        dotColor: Colors.grey,
+                        activeDotColor: Colors.black,
+                        expansionFactor: 7,
+                        dotHeight: 6,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  CommonText(
+                    text: "Royal Peace Spa",
+                    weight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                  CommonText(
+                    text:
+                        "Relax and rejuvenate with the traditional Thai dry therapy Relax and rejuvenate with the",
+                    fontSize: 12,
+                    color: Colors.grey,
+                  ),
+                  SizedBox(height: 20),
+                  CommonText(
+                    text: "Catagories",
+                    weight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+
+                          SizedBox(
+                            height: 180,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemCount: 2,
+                              itemBuilder: (context, index) => Column(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(right: 15.0),
+                                        child: CommonContainer(
+                                          height: 170,
+                                          width: context.screenWidth * 0.4,
+                                          borderRadius: 13,
+                                          color: Colors.blue,
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 15.0,
+                                              vertical: 30,
+                                            ),
+                                            child: CommonText(
+                                              text: "Fitness",
+                                              fontSize: 18,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        top: 70,
+                                        left: 300,
+                                        child: Image.asset(
+                                          "assets/images/spa.png",
+                                          scale: 0.9,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                ],
+                              ),
+                            ),
+                          ),
+
+
+
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  CommonText(
+                    text: "Top Classes",
+                    weight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                  SizedBox(height: 20),
+                  GridView.builder(
+                    shrinkWrap: true,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      childAspectRatio: 1.2,
+                      crossAxisSpacing: 30,
+                    ),
+                    itemCount: 9,
+                    itemBuilder: (context, index) => TopClasses(),
+                  ),
+                ],
+              ),
+            ),
+            CommonFooter(),
           ],
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 80.0),
-            child: Row(
-              children: [
-                Icon(Icons.search_sharp),
-                SizedBox(width: 15),
-                Icon(Icons.notifications_outlined),
-                SizedBox(width: 15),
-                CircleAvatar(radius: 15, backgroundColor: Colors.red),
-              ],
-            ),
-          ),
-        ],
-
-        backgroundColor: appBarColor,
-        centerTitle: true,
       ),
-
     );
   }
 }

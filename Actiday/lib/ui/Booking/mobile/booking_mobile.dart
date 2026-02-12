@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/widgets/common_text.dart';
+import '../../utils/widgets/common_text.dart';
 
 
 class BookingMobile extends StatefulWidget {
