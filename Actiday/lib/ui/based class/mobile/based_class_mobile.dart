@@ -22,25 +22,7 @@ class _BasedClassMobileState extends State<BasedClassMobile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 20.0),
-          child: SvgPicture.asset(AppAssets.category),
-        ),
-        leadingWidth: 50,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.location_on),
-            CommonText(text: "Abu Dhabi, UAE", fontSize: 12),
-          ],
-        ),
-        actions: [Padding(
-          padding: const EdgeInsets.only(right: 20.0),
-          child: Icon(Icons.notifications_outlined),
-        )],
 
-      ),
 
       body: list[selectedIndex].screen,
 

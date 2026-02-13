@@ -1,11 +1,9 @@
+import 'package:actiday/ui/home/helper/common_carousel.dart';
 import 'package:actiday/ui/home/helper/top_classes.dart';
 import 'package:actiday/ui/utils/widgets/common_size.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import '../../utils/theme/app_assets.dart';
+import 'package:flutter/services.dart';
+import '../../../framework/repository/booking/booking_model.dart';
 import '../../utils/widgets/common_container.dart';
 import '../../utils/widgets/common_footer.dart';
 import '../../utils/widgets/common_text.dart';
@@ -18,7 +16,27 @@ class HomeScreenWeb extends StatefulWidget {
 }
 
 class _HomeScreenWebState extends State<HomeScreenWeb> {
-  int _currentIndex = 0;
+
+
+  Welcome? welcome;
+
+  @override
+  void initState() {
+    super.initState();
+    loadBookingJson();
+  }
+
+  Future<void> loadBookingJson() async {
+    final String response = await rootBundle.loadString(
+      'assets/json/home.json',
+    );
+
+    final data = welcomeFromJson(response);
+
+    setState(() {
+      welcome = data;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,65 +52,7 @@ class _HomeScreenWebState extends State<HomeScreenWeb> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // SizedBox(
-                  //   height: 100,
-                  //   width: 1000,
-                  //
-                  //   child: ListView.builder(
-                  //     scrollDirection: Axis.horizontal,
-                  //     shrinkWrap: true,
-                  //     itemCount: 3,
-                  //     itemBuilder: (context, index) => Padding(
-                  //       padding: const EdgeInsets.only(right: 15),
-                  //       child: CommonContainer(
-                  //         borderRadius: 13,
-                  //
-                  //         child: Image.asset( AppAssets.banner,fit: BoxFit.cover,),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  CarouselSlider(
-                    items: [
-                      CommonContainer(
-                        borderRadius: 13,
-
-                        child: Image.asset(AppAssets.banner, fit: BoxFit.cover),
-                      ),
-                      CommonContainer(
-                        borderRadius: 13,
-
-                        child: Image.asset(AppAssets.banner, fit: BoxFit.cover),
-                      ),
-                    ],
-                    options: CarouselOptions(
-                      height: 200,
-                      viewportFraction: 0.9,
-                      autoPlay: true,
-                      autoPlayCurve: Curves.easeInOut,
-                      enlargeCenterPage: true,
-                      animateToClosest: true,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          _currentIndex = index;
-                        });
-                      },
-                    ),
-                  ),
-
-                  SizedBox(height: 10),
-                  Center(
-                    child: SmoothPageIndicator(
-                      controller: PageController(initialPage: _currentIndex),
-                      count: 2,
-                      effect: ExpandingDotsEffect(
-                        dotColor: Colors.grey,
-                        activeDotColor: Colors.black,
-                        expansionFactor: 7,
-                        dotHeight: 6,
-                      ),
-                    ),
-                  ),
+                  CommonCarousel(showIndicator: true),
                   SizedBox(height: 20),
                   CommonText(
                     text: "Royal Peace Spa",
