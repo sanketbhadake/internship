@@ -1,8 +1,10 @@
-import 'package:actiday/ui/based%20class/based_class.dart';
+
+import 'package:actiday/framework/repository/booking/booking_model.dart';
 import 'package:actiday/ui/splash/helper/common_image.dart';
-import 'package:actiday/ui/utils/theme/app_assets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/services.dart';
+import '../../../framework/repository/home/home_model.dart';
+import '../../login/login_screen.dart';
 
 class SplashScreenMobile extends StatefulWidget {
   const SplashScreenMobile({super.key});
@@ -12,17 +14,45 @@ class SplashScreenMobile extends StatefulWidget {
 }
 
 class _SplashScreenMobileState extends State<SplashScreenMobile> {
+  static Welcome? welcome;
+  static WelcomeBook? booking;
+
   @override
-  void initState(){
+  void initState()   {
     super.initState();
-    Future.delayed(Duration(seconds: 3),(){
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>BasedClass()));
+    loadHomeJson();
+    loadBookingJson();
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.of(
+        context,
+      ).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
     });
   }
+  Future<void> loadHomeJson() async {
+    final String response = await rootBundle.loadString(
+      'assets/json/home.json',
+    );
+    final data = welcomeFromJson(response);
+    setState(() {
+      welcome = data;
+
+    });
+  }
+  Future<void> loadBookingJson() async {
+    final String response = await rootBundle.loadString(
+      'assets/json/bookings.json',
+    );
+    final data = welcomeFromBookJson(response);
+    setState(() {
+      booking = data;
+      print("book data loaded : $booking ");
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body:CommonImage(imageHeight: 140, imageWidth: 140)
-    );
+
+    return Scaffold(body: CommonImage(imageHeight: 140, imageWidth: 140));
   }
 }

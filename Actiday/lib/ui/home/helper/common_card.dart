@@ -1,8 +1,8 @@
+import 'package:actiday/ui/utils/widgets/common_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
+import 'package:intl/intl.dart';
 import '../../utils/widgets/common_container.dart';
-import '../../utils/widgets/common_size.dart';
 import '../../utils/widgets/common_text.dart';
 
 class CommonCard extends StatefulWidget {
@@ -10,23 +10,31 @@ class CommonCard extends StatefulWidget {
   final String? title;
   final String? subTitle;
   final String? address;
-  final double? rating;
-  final bool? showDate;
+  final int? rating;
+  final bool isBooking;
   final double? distance;
+  final DateTime? date;
   final bool? isFav;
+  final int? credit;
+  final bool isPast;
   final Function()? onTap;
+  final Function()? bookingOnTap;
 
-  const CommonCard(  {
+  const CommonCard({
     super.key,
     required this.image,
     this.title,
-    this.isFav=false,
     this.subTitle,
-    this.onTap,
     this.address,
     this.rating,
-    this.showDate,
     this.distance,
+    this.date,
+    this.credit,
+    this.onTap,
+    this.bookingOnTap,
+    this.isFav = false,
+    this.isBooking = false,
+    this.isPast = false,
   });
 
   @override
@@ -34,52 +42,86 @@ class CommonCard extends StatefulWidget {
 }
 
 class _CommonCardState extends State<CommonCard> {
-
-
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        /// Background Image Container
         CommonContainer(
-          height: 250,
-          width: context.screenWidth,
+          height: 260,
+          width: double.infinity,
           borderRadius: 13,
-          color: Colors.grey,
+
           child: Column(
             children: [
               Image.network(
                 widget.image,
-                fit: BoxFit.fitWidth,
+                height: 180,
+                width: double.infinity,
+                fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
-                  return Image.asset("assets/images/bookings.png", scale: 0.9);
+                  return Image.asset(
+                    "assets/images/bookings.png",
+                    height: 180,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  );
                 },
               ),
             ],
           ),
         ),
-        Positioned(
-          right: 20,
-          top: 20,
-          child: GestureDetector(
-            onTap:  widget.onTap,
-            child: CircleAvatar(
-              radius: 15,
-              backgroundColor: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: widget.isFav?? false
-                    ? Icon(Icons.favorite, size: 18, color: Colors.red)
-                    : Icon(Icons.favorite, size: 18, color: Colors.grey),
+
+        /// Favorite Icon
+        if (!widget.isBooking)
+          Positioned(
+            top: 15,
+            right: 25,
+
+            // right: -context.screenWidth*0.2,
+            child: GestureDetector(
+              onTap: widget.onTap,
+              child: CircleAvatar(
+                radius: 15,
+                backgroundColor: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: widget.isFav ?? false
+                      ? const Icon(Icons.favorite, size: 18, color: Colors.red)
+                      : const Icon(
+                          Icons.favorite,
+                          size: 18,
+                          color: Colors.grey,
+                        ),
+                ),
               ),
             ),
           ),
-        ),
+
+        /// Bottom Information Card
         Positioned(
-          top: 130,
-          child: CommonContainer(
-            height: 120,
-            width: context.screenWidth,
-            color: Color(0xFFFFFFFF),
+          top: 155,
+          left: 0,
+          right: 0,
+          child: Container(
+            height: 100,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 0.5,
+                color:  widget.isBooking
+                    ? Color(0xffD4D4D4)
+                    : Colors.transparent,
+              ),
+              color: widget.isBooking
+                  ? Color(0xffFFFFFF)
+                  : const Color(0xFFF8F8F8),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(13),
+                bottomRight: Radius.circular(13),
+              ),
+            ),
+
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 20.0,
@@ -88,6 +130,7 @@ class _CommonCardState extends State<CommonCard> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  /// Title + Rating / Credit
                   Row(
                     children: [
                       CommonText(
@@ -95,36 +138,97 @@ class _CommonCardState extends State<CommonCard> {
                         fontSize: 14,
                         weight: FontWeight.bold,
                       ),
-                      Spacer(),
-                      CommonText(
-                        text: widget.rating.toString(),
+                      const Spacer(),
 
-                        fontSize: 14,
-                        weight: FontWeight.bold,
-                      ),
-                      SizedBox(width: 4),
-                      SvgPicture.asset("assets/svgs/star.svg", height: 18),
-                      SizedBox(width: 20),
+                      /// Booking Mode
+                      widget.isBooking
+                          ? Row(
+                              children: [
+                                CommonText(
+                                  text: "${widget.credit} Credit",
+                                  fontSize: 14,
+                                  weight: FontWeight.bold,
+                                ),
+                              ],
+                            )
+                          /// Normal Mode
+                          : Row(
+                              children: [
+                                CommonText(
+                                  text: widget.rating.toString(),
+                                  fontSize: 14,
+                                  weight: FontWeight.bold,
+                                ),
+                                const SizedBox(width: 4),
+                                SvgPicture.asset(
+                                  "assets/svgs/star.svg",
+                                  height: 18,
+                                ),
+                                const SizedBox(width: 20),
+                              ],
+                            ),
                     ],
                   ),
-                  CommonText(text: widget.subTitle ?? "", fontSize: 14),
 
-                  Row(
-                    children: [
-                      Icon(Icons.location_on, color: Colors.grey),
-                      CommonText(
-                        text: widget.address ??  "",
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                      CommonText(
-                        text:"(${ widget.distance.toString()} Km)" ?? "0",
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-
-                    ],
+                  /// Subtitle
+                  Flexible(
+                    child: CommonText(
+                      text: widget.subTitle ?? "",
+                      fontSize: 11,
+                    ),
                   ),
+                  (widget.isBooking)
+                      ? Divider(thickness: 0.5)
+                      : SizedBox(height: 5),
+
+                  /// Bottom Row
+                  widget.isBooking
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              child: CommonText(
+                                text: widget.date != null
+                                    ? DateFormat(
+                                        'dd MMM yyyy, hh:mm a',
+                                      ).format(widget.date!)
+                                    : "",
+                                fontSize: 12,
+                              ),
+                            ),
+
+                            GestureDetector(
+                              onTap: widget.bookingOnTap,
+                              child: CommonContainer(
+                                borderRadius: 14,
+                                height: 25,
+                                width: 75,
+                                borderColor: const Color(0xffF048C6),
+                                child: Center(
+                                  child: CommonText(
+                                    text: widget.isPast ? "Continue" : "Book",
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : Row(
+                          children: [
+                            const Icon(Icons.location_on, color: Colors.grey),
+
+                            Flexible(
+                              child: CommonText(
+                                text:
+                                    "${widget.address} (${widget.distance.toString()} Km)" ??
+                                    "0",
+                                fontSize: 12,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
                 ],
               ),
             ),

@@ -4,27 +4,32 @@
 
 import 'dart:convert';
 
-Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
+WelcomeBook welcomeFromBookJson(String str) => WelcomeBook.fromJson(json.decode(str));
 
-String welcomeToJson(Welcome data) => json.encode(data.toJson());
+String welcomeToBookJson(WelcomeBook data) => json.encode(data.toJson());
 
-class Welcome {
+class WelcomeBook {
   List<Past>? upcoming;
   List<Past>? past;
 
-  Welcome({
-    this.upcoming,
-    this.past,
-  });
+  WelcomeBook({this.upcoming, this.past});
 
-  factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
-    upcoming: json["upcoming"] == null ? [] : List<Past>.from(json["upcoming"]!.map((x) => Past.fromJson(x))),
-    past: json["past"] == null ? [] : List<Past>.from(json["past"]!.map((x) => Past.fromJson(x))),
+  factory WelcomeBook.fromJson(Map<String, dynamic> json) => WelcomeBook(
+    upcoming: json["upcoming"] == null
+        ? []
+        : List<Past>.from(json["upcoming"]!.map((x) => Past.fromJson(x))),
+    past: json["past"] == null
+        ? []
+        : List<Past>.from(json["past"]!.map((x) => Past.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
-    "upcoming": upcoming == null ? [] : List<dynamic>.from(upcoming!.map((x) => x.toJson())),
-    "past": past == null ? [] : List<dynamic>.from(past!.map((x) => x.toJson())),
+    "upcoming": upcoming == null
+        ? []
+        : List<dynamic>.from(upcoming!.map((x) => x.toJson())),
+    "past": past == null
+        ? []
+        : List<dynamic>.from(past!.map((x) => x.toJson())),
   };
 }
 
@@ -35,6 +40,14 @@ class Past {
   List<String>? subTitle;
   String? date;
   int? credit;
+  String? address;
+  double? rating;
+  String? category;
+  String? time;
+  String? specialist;
+  String? timeSlot;
+  String? bookingId;
+  String? status;
 
   Past({
     this.id,
@@ -43,23 +56,64 @@ class Past {
     this.subTitle,
     this.date,
     this.credit,
+    this.address,
+    this.rating,
+    this.category,
+    this.time,
+    this.specialist,
+    this.timeSlot,
+    this.bookingId,
+    this.status,
   });
 
   factory Past.fromJson(Map<String, dynamic> json) => Past(
     id: json["id"],
     image: json["image"],
     title: json["title"],
-    subTitle: json["sub_title"] == null ? [] : List<String>.from(json["sub_title"]!.map((x) => x)),
+    subTitle: json["sub_title"] == null
+        ? []
+        : List<String>.from(json["sub_title"]!.map((x) => x)),
     date: json["date"],
     credit: json["credit"],
+    address: json["address"],
+    rating: json["rating"]?.toDouble(),
+    category: json["category"],
+    time: json["time"],
+    specialist: json["specialist"],
+    timeSlot: json["time_slot"],
+    bookingId: json["booking_id"],
+    status:json["status"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "image": image,
     "title": title,
-    "sub_title": subTitle == null ? [] : List<dynamic>.from(subTitle!.map((x) => x)),
+    "sub_title": subTitle == null
+        ? []
+        : List<dynamic>.from(subTitle!.map((x) => x)),
     "date": date,
     "credit": credit,
+    "address": address,
+    "rating": rating,
+    "category": category,
+    "time": time,
+    "specialist": specialist,
+    "time_slot": timeSlot,
+    "booking_id": bookingId,
+    "status":status,
   };
+}
+
+
+class EnumValues<T> {
+  Map<String, T> map;
+  late Map<T, String> reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    reverseMap = map.map((k, v) => MapEntry(v, k));
+    return reverseMap;
+  }
 }

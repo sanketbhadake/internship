@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'common_text.dart';
 
-class CustomTextForm extends StatelessWidget {
+class CommonTextForm extends StatelessWidget {
   final String hint ;
   final Widget? sufixIcon;
   final Widget? preFixIcon;
-  const CustomTextForm( {super.key,required this.hint, this.sufixIcon,this.preFixIcon});
+  const CommonTextForm( {super.key,required this.hint, this.sufixIcon,this.preFixIcon});
 
   @override
   Widget build(BuildContext context) {

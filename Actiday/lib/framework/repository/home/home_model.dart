@@ -85,7 +85,7 @@ class Category {
 }
 
 class TopClass {
-  String? id;
+  int? id;
   String? image;
   bool? isFavourite;
   String? title;

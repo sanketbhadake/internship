@@ -4,3 +4,7 @@ enum BottomNaviItems{
   Explore,
   Favourite
 }
+enum Status {
+  BOOK,
+  CONTINUE
+}

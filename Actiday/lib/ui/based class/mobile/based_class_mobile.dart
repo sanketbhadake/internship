@@ -1,9 +1,11 @@
 import 'package:actiday/framework/controller/based%20controller/bottom_list.dart';
 import 'package:actiday/ui/utils/theme/app_assets.dart';
+import 'package:actiday/ui/utils/widgets/common_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../utils/widgets/common_text.dart';
+import '../based_class.dart';
 
 
 
@@ -17,21 +19,21 @@ class BasedClassMobile extends StatefulWidget {
 
 class _BasedClassMobileState extends State<BasedClassMobile> {
   final list = BottomList.bottomMenuList;
-  int selectedIndex = 0;
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
 
-      body: list[selectedIndex].screen,
+      body: list[BasedClass.selectIndex].screen,
 
 
       bottomNavigationBar: BottomNavigationBar(
         items: list.map((data) {
           int index = list.indexOf(data);
           return BottomNavigationBarItem(
-            icon: Container(
+            icon: CommonContainer(
               height: 30,
               width: 30,
               child: data.icon,
@@ -49,10 +51,10 @@ class _BasedClassMobileState extends State<BasedClassMobile> {
 
         onTap: (index) {
           setState(() {
-            selectedIndex = index;
+            BasedClass.selectIndex = index;
           });
         },
-        currentIndex: selectedIndex,
+        currentIndex: BasedClass.selectIndex,
         unselectedItemColor: Colors.grey,
       ),
     );

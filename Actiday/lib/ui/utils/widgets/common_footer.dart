@@ -15,7 +15,7 @@ class _CommonFooterState extends State<CommonFooter> {
   @override
   Widget build(BuildContext context) {
     return  Container(
-        height: 170,
+        height: 110,
         width: context.screenWidth,
         color: Colors.black,
         child: Row(

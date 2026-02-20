@@ -8,12 +8,16 @@ import '../../utils/widgets/common_container.dart';
 
 class CommonCarousel extends StatefulWidget {
   final bool showIndicator;
-  const CommonCarousel({super.key, required this.showIndicator});
+  final double? height;
+
+  const CommonCarousel({super.key, this.height, required this.showIndicator});
 
   @override
   State<CommonCarousel> createState() => _CommonCarouselState();
 }
+
 int _currentIndex = 0;
+
 class _CommonCarouselState extends State<CommonCarousel> {
   @override
   Widget build(BuildContext context) {
@@ -22,19 +26,28 @@ class _CommonCarouselState extends State<CommonCarousel> {
         CarouselSlider(
           items: [
             CommonContainer(
+              height: widget.height,
               borderRadius: 13,
 
-              child: Image.asset(AppAssets.banner, fit: BoxFit.cover),
+              child: Image.asset(
+                AppAssets.banner,
+                width: double.infinity,
+                // height: widget.height,
+                fit: BoxFit.fill,
+              ),
             ),
             CommonContainer(
+              height: widget.height,
               borderRadius: 13,
 
-              child: Image.asset(AppAssets.banner, fit: BoxFit.cover),
+              child: Image.asset(AppAssets.banner,  width: double.infinity,
+                // height: widget.height,
+                fit: BoxFit.fill,),
             ),
           ],
           options: CarouselOptions(
             // height: 200,
-            height: 160,
+            height: widget.height,
             viewportFraction: 0.9,
             autoPlay: true,
             autoPlayCurve: Curves.easeInOut,
@@ -47,9 +60,7 @@ class _CommonCarouselState extends State<CommonCarousel> {
             },
           ),
         ),
-        Visibility(
-            visible: widget.showIndicator,
-            child: SizedBox(height: 10)),
+        Visibility(visible: widget.showIndicator, child: SizedBox(height: 10)),
         Visibility(
           visible: widget.showIndicator,
           child: Center(
@@ -67,7 +78,5 @@ class _CommonCarouselState extends State<CommonCarousel> {
         ),
       ],
     );
-
-
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class BasedClass extends StatefulWidget {
+  static int selectIndex=0;
   const BasedClass({super.key});
 
   @override
@@ -11,6 +12,7 @@ class BasedClass extends StatefulWidget {
 }
 
 class _BasedClassState extends State<BasedClass> {
+
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout.builder(

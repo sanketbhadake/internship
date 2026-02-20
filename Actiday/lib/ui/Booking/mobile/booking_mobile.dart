@@ -1,5 +1,4 @@
-import 'package:actiday/ui/utils/widgets/common_container.dart';
-import 'package:actiday/ui/utils/widgets/common_size.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -38,10 +37,14 @@ class _BookingMobileState extends State<BookingMobile> {
                 labelColor: Colors.pink,
                 indicatorColor: Colors.pink,
                 unselectedLabelColor: Colors.grey,
+                dividerColor: Colors.transparent,
                 tabs: [
                   Tab(text: "Upcoming"),
-                  Tab(text: "Past,"),
+                  Tab(text: "Past"),
                 ],
+              ),
+              SizedBox(
+                height: 20,
               ),
 
               Expanded(

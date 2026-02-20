@@ -1,8 +1,9 @@
 import 'package:actiday/framework/controller/favourite/favourite_controller.dart';
+import 'package:actiday/framework/controller/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../home/helper/common_card.dart';
+import '../../splash/splash_screen.dart';
 import '../../utils/theme/app_assets.dart';
 import '../../utils/widgets/common_text.dart';
 
@@ -14,6 +15,7 @@ class FavouriteMobile extends StatefulWidget {
 }
 
 class _FavouriteMobileState extends State<FavouriteMobile> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,38 +25,55 @@ class _FavouriteMobileState extends State<FavouriteMobile> {
           child: SvgPicture.asset(AppAssets.category),
         ),
         leadingWidth: 50,
-        title: CommonText(text: "My Favorite", fontSize: 12),
+        title: CommonText(text: "My Favorite", fontSize: 16),
         centerTitle: true,
       ),
 
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: FavouriteController.favouriteList.length,
+        child: FavouriteController.favouriteList.isEmpty
+            ? const Center(child: CommonText(text: "No Favourite found", fontSize: 18,color: Colors.black,))
+            : ListView.builder(
+                shrinkWrap: true,
+                itemCount: FavouriteController.favouriteList.length,
 
-          itemBuilder: (context, index) {
-            final item = FavouriteController.favouriteList;
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 15),
-              child: CommonCard(
-                showDate: false,
+                itemBuilder: (context, index) {
+                  final item = FavouriteController.favouriteList;
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: CommonCard(
+                      image: item[index].image ?? "",
+                      title: item[index].title ?? "",
+                      distance:
+                      double.tryParse(
+                        item[index].distance ?? "",
+                      ) ??
+                          0,
 
-                image: item[index].image ?? "",
-                title: item[index].title ?? "",
+                      address: item[index].address ?? "",
+                      rating: item[index].rating ?? 0,
+                      isFav: item[index].isLike,
+                      onTap: () {
+                        setState(() {
+                          final removedItem = FavouriteController.favouriteList[index];
 
-                address: item[index].address ?? "",
-                rating: (item[index].rating ?? 0) as double,
-                isFav: item[index].isLike,
-                onTap: (){
-                  setState(() {
-                    item.removeAt(index);
-                  });
+                          // Update Home list
+                          final homeItem = SplashScreenState
+                              .welcome
+                              ?.topClass
+                              ?.firstWhere(
+                                (element) => element.id == removedItem.id,
+                          );
+
+                          homeItem?.isFavourite = false;
+
+                          // Remove from favourite list
+                          FavouriteController.favouriteList.removeAt(index);
+                        });
+                      }, ),
+                  );
                 },
               ),
-            );
-          },
-        ),
       ),
     );
   }

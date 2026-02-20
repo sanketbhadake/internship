@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class Booking extends StatefulWidget {
-  const Booking({super.key});
+  // final bool upcoming;
+  // final bool past;
+  // final int id;
+  const Booking(  {super.key});
 
   @override
   State<Booking> createState() => _BookingState();

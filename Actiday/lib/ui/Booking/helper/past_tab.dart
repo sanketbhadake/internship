@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 
 import '../../../framework/repository/booking/booking_model.dart';
 import '../../home/helper/common_card.dart';
-import '../../utils/widgets/common_text.dart';
+
+import '../booking detail/mobile/booking_detail_mobile.dart';
 
 class PastTab extends StatefulWidget {
   const PastTab({super.key});
@@ -13,8 +14,7 @@ class PastTab extends StatefulWidget {
 }
 
 class _PastTabState extends State<PastTab> {
-  Welcome? welcome;
-
+  WelcomeBook? welcome;
 
   @override
   void initState() {
@@ -27,7 +27,7 @@ class _PastTabState extends State<PastTab> {
       'assets/json/bookings.json',
     );
 
-    final data = welcomeFromJson(response);
+    final data = welcomeFromBookJson(response);
 
     setState(() {
       welcome = data;
@@ -37,18 +37,34 @@ class _PastTabState extends State<PastTab> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-
       shrinkWrap: true,
       itemCount: welcome?.past?.length ?? 0,
       itemBuilder: (context, index) => Padding(
         padding: const EdgeInsets.only(bottom: 15),
         child: CommonCard(
-          showDate: false,
+          isBooking: true,
+          isPast: true,
           image: welcome?.past?[index].image ?? "NA",
           title: welcome?.past?[index].title ?? "NA",
           subTitle: welcome?.past?[index].subTitle?.join(", ") ?? "NA",
           address: welcome?.past?[index].date ?? "NA",
-          rating: (welcome?.past?[index].credit ?? "0") as double,
+          credit: welcome?.past?[index].credit ?? 0,
+          date: welcome?.past?[index].date != null
+              ? DateTime.fromMicrosecondsSinceEpoch(
+                  int.parse(welcome!.past![index].date!),
+                )
+              : null,
+          bookingOnTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => BookingDetailMobile(
+                  id:index ,
+                  upcoming: false,
+                  past: true,
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

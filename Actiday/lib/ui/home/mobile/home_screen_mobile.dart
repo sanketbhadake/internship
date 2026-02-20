@@ -1,17 +1,17 @@
 import 'package:actiday/framework/controller/favourite/favourite_controller.dart';
+import 'package:actiday/framework/controller/home/home_controller.dart';
 import 'package:actiday/framework/repository/favourite/favourite_model.dart';
-import 'package:actiday/framework/repository/home/home_model.dart';
 import 'package:actiday/ui/home/helper/common_card.dart';
 import 'package:actiday/ui/home/helper/common_carousel.dart';
+import 'package:actiday/ui/home/helper/common_categories.dart';
+import 'package:actiday/ui/login/login_screen.dart';
 import 'package:actiday/ui/utils/theme/app_assets.dart';
+import 'package:actiday/ui/utils/widgets/common_container.dart';
+import 'package:actiday/ui/utils/widgets/common_textform.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../utils/widgets/common_container.dart';
-import '../../utils/widgets/common_size.dart';
+import '../../splash/splash_screen.dart';
 import '../../utils/widgets/common_text.dart';
-import '../../utils/widgets/common_textform.dart';
 
 class HomeScreenMobile extends StatefulWidget {
   const HomeScreenMobile({super.key});
@@ -21,44 +21,126 @@ class HomeScreenMobile extends StatefulWidget {
 }
 
 class _HomeScreenMobileState extends State<HomeScreenMobile> {
-  Welcome? welcome;
   bool isLike = false;
-  @override
-  void initState() {
-    super.initState();
-    loadBookingJson();
-  }
+  final item = HomeController.item;
+  int indexat = 0;
 
-  Future<void> loadBookingJson() async {
-    final String response = await rootBundle.loadString(
-      'assets/json/home.json',
+  /// make list in controller
+  void showAlertBoxModel() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: CommonContainer(
+          height: 110,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const CommonText(text: "Are you sure to Logout", fontSize: 16),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const CommonContainer(
+                        height: 30,
+                        width: 80,
+                        borderRadius: 10,
+                        borderColor: Colors.black,
+
+                        child: Center(
+                          child: CommonText(
+                            text: "NO",
+                            fontSize: 10,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                            builder: (context) => const LoginScreen(),
+                          ),
+                          (route) => false,
+                        );
+                      },
+                      child: const CommonContainer(
+                        height: 30,
+                        width: 80,
+                        borderRadius: 10,
+                        color: Colors.red,
+                        child: Center(
+                          child: CommonText(
+                            text: "YES",
+                            fontSize: 10,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
-    final data = welcomeFromJson(response);
-
-    setState(() {
-      welcome = data;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children: [
+            const SizedBox(height: 80),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+                Future.delayed(const Duration(milliseconds: 50),(){
+                  showAlertBoxModel();
+                });
+                // showAlertBoxModel();
+              },
+              child: const ListTile(
+                title: CommonText(text: "Logout", fontSize: 14),
+                leading: Icon(Icons.logout_outlined),
+              ),
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 20.0),
-          child: SvgPicture.asset(AppAssets.category),
+        leading: Builder(
+          builder: (context) => Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: InkWell(
+              onTap: () {
+                Scaffold.of(context).openDrawer();
+              },
+              child: SvgPicture.asset(AppAssets.category),
+            ),
+          ),
         ),
         leadingWidth: 50,
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.location_on),
             CommonText(text: "Abu Dhabi, UAE", fontSize: 12),
           ],
         ),
-        actions: [
+        actions:  const [
           Padding(
-            padding: const EdgeInsets.only(right: 20.0),
+            padding: EdgeInsets.only(right: 20.0),
             child: Icon(Icons.notifications_outlined),
           ),
         ],
@@ -69,72 +151,48 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomTextForm(
+              const CommonTextForm(
                 hint: "yoga, pilates, massage",
                 preFixIcon: Icon(Icons.search_sharp),
               ),
-              SizedBox(height: 20),
-
-              CommonCarousel(showIndicator: false),
-              SizedBox(height: 20),
-              CommonText(text: "Active Lifestyle", fontSize: 16),
-              CommonText(
+              const SizedBox(height: 20),
+              const CommonCarousel(showIndicator: false, height: 150),
+              const SizedBox(height: 20),
+              const CommonText(text: "Active Lifestyle", fontSize: 16),
+              const CommonText(
                 text: "Get active every day Try new things \nFind new classes",
                 fontSize: 12,
               ),
-              SizedBox(height: 20),
-              CommonText(
+              const SizedBox(height: 20),
+              const CommonText(
                 text: "Catagories",
                 fontSize: 18,
                 weight: FontWeight.bold,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               SizedBox(
                 height: 120,
                 child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: welcome?.categories?.length ?? 0,
+                  itemCount: SplashScreenState.welcome?.categories?.length ?? 0,
 
-                  itemBuilder: (context, index) => Row(
-                    children: [
-                      Stack(
-                        children: [
-                          CommonContainer(
-                            height: 110,
-                            width: context.screenWidth * 0.4,
-                            borderRadius: 13,
-                            color: Colors.blue,
-                            child: Image.network(
-                              welcome?.categories?[index].image ?? "NA",
-                              scale: 2,
-                              fit: BoxFit.fitHeight,
-                            ),
-                          ),
-                          Positioned(
-                            top: 20,
-                            left: 10,
-                            child: SizedBox(
-                              width: 80,
-                              child: CommonText(
-                                text:
-                                    welcome?.categories?[index].categoryName ??
-                                    "NA",
-                                fontSize: 14,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(width: 10),
-                    ],
+                  itemBuilder: (context, index) => CommonCategories(
+                    height: 120,
+                    width: 175,
+                    image: SplashScreenState.welcome?.categories?[index].image,
+
+                    title: SplashScreenState
+                        .welcome
+                        ?.categories?[index]
+                        .categoryName,
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-              Row(
+
+              const SizedBox(height: 20),
+              const Row(
                 children: [
                   CommonText(
                     text: "Top Classes",
@@ -150,47 +208,81 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: welcome?.topClass?.length ?? 0,
-                itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.only(bottom: 15),
-                  child: CommonCard(
-                    showDate: false,
-                    image:
-                        "https://blog.nasm.org/hubfs/women-weight-lifting.jpg",
-                    title: welcome?.topClass?[index].title ?? "",
-                    subTitle: welcome?.topClass?[index].subTitle ?? "",
-                    address: welcome?.topClass?[index].address ?? "",
-                    rating: (welcome?.topClass?[index].rating ?? "") as double,
-                    isFav: welcome?.topClass?[index].isFavourite ?? false,
-                    distance:
-                        double.tryParse(
-                          welcome?.topClass?[index].distance ?? "0",
-                        ) ??
-                        0.0,
-                    onTap: () {
-                      setState(() {
-                        isLike=!isLike;
-                        FavouriteController.favouriteList.add(
-                          FavouriteModel(
-                            image:
-                            "https://blog.nasm.org/hubfs/women-weight-lifting.jpg",
-                            title: welcome?.topClass?[index].title ?? "",
-                            address: welcome?.topClass?[index].address ?? "",
-                            distance: welcome?.topClass?[index].distance ?? "0",
-                            rating: welcome?.topClass?[index].rating ?? 0,
-                            isLike: isLike
-                          ),
-                        );
-                        welcome?.topClass?[index].isFavourite=isLike;
-                      });
+                itemCount: SplashScreenState.welcome?.topClass?.length ?? 0,
 
-                    },
-                  ),
-                ),
+                itemBuilder: (context, index) {
+                  indexat = index;
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: CommonCard(
+                      image:
+                          "https://blog.nasm.org/hubfs/women-weight-lifting.jpg",
+
+                      title:
+                          SplashScreenState.welcome?.topClass?[index].title ??
+                          "",
+
+                      subTitle:
+                          SplashScreenState
+                              .welcome
+                              ?.topClass?[index]
+                              .subTitle ??
+                          "",
+                      address:
+                          SplashScreenState.welcome?.topClass?[index].address ??
+                          "",
+                      rating:
+                          SplashScreenState.welcome?.topClass?[index].rating ??
+                          0,
+                      isFav: SplashScreenState
+                          .welcome
+                          ?.topClass?[index]
+                          .isFavourite,
+                      distance:
+                          double.tryParse(
+                            SplashScreenState
+                                    .welcome
+                                    ?.topClass?[index]
+                                    .distance ??
+                                "0",
+                          ) ??
+                          0.0,
+                      onTap: () {
+                        setState(() {
+                          final item =
+                              SplashScreenState.welcome?.topClass?[index];
+
+                          if (item == null) return;
+
+                          item.isFavourite = !(item.isFavourite ?? false);
+
+                          if (item.isFavourite == true) {
+                            FavouriteController.favouriteList.add(
+                              FavouriteModel(
+                                id: item.id,
+                                image:
+                                    "https://blog.nasm.org/hubfs/women-weight-lifting.jpg",
+                                title: item.title ?? "",
+                                address: item.address ?? "",
+                                distance: item.distance ?? "0",
+                                rating: item.rating ?? 0,
+                                isLike: true,
+                              ),
+                            );
+                          } else {
+                            FavouriteController.favouriteList.removeWhere(
+                              (fav) => fav.id == item.id,
+                            );
+                          }
+                        });
+                      },
+                    ),
+                  );
+                },
               ),
             ],
           ),
