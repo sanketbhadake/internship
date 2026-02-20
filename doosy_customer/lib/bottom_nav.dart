@@ -2,6 +2,7 @@ import 'package:doosy_customer/validator.dart';
 import 'package:flutter/material.dart';
 
 import 'home_screen.dart';
+import 'order_screen.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
@@ -15,7 +16,7 @@ class _BottomNavState extends State<BottomNav> {
     HomeScreen(),
     Validator(),
     HomeScreen(),
-    HomeScreen(),
+    OrderScreen(),
     HomeScreen(),
   ];
   int _selectIndex=0;
