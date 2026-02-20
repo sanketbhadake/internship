@@ -196,13 +196,22 @@ class _CommonCardState extends State<CommonCard> {
                               onTap: widget.bookingOnTap,
                               child: CommonContainer(
                                 borderRadius: 14,
-                                height: 25,
-                                width: 75,
-                                borderColor: const Color(0xffF048C6),
-                                child: Center(
-                                  child: CommonText(
-                                    text: widget.isPast ? "Continue" : "Book",
-                                    fontSize: 10,
+                                gradient: true,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(0.5),
+                                  child: CommonContainer(
+                                    borderRadius: 14,
+                                    height: 25,
+                                    width: 75,
+                                    color: Colors.white,
+                                    child: Center(
+                                      child: CommonText(
+                                        text: widget.isPast
+                                            ? "Continue"
+                                            : "Book",
+                                        fontSize: 12,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
