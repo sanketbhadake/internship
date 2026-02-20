@@ -1,13 +1,12 @@
 import 'package:actiday/ui/home/helper/common_carousel.dart';
 import 'package:flutter/material.dart';
-import '../../../framework/controller/favourite/favourite_controller.dart';
-import '../../../framework/repository/favourite/favourite_model.dart';
-import '../../splash/mobile/splash_screen_mobile.dart';
-import '../../splash/splash_screen.dart';
-import '../../utils/widgets/common_footer.dart';
-import '../../utils/widgets/common_text.dart';
-import '../helper/common_card.dart';
-import '../helper/common_categories.dart';
+import 'package:actiday/framework/controller/favourite/favourite_controller.dart';
+import 'package:actiday/framework/repository/favourite/favourite_model.dart';
+import 'package:actiday/ui/splash/splash_screen.dart';
+import 'package:actiday/ui/utils/widgets/common_footer.dart';
+import 'package:actiday/ui/utils/widgets/common_text.dart';
+import 'package:actiday/ui/home/helper/common_card.dart';
+import 'package:actiday/ui/home/helper/common_categories.dart';
 
 class HomeScreenWeb extends StatefulWidget {
   const HomeScreenWeb({super.key});
@@ -17,7 +16,7 @@ class HomeScreenWeb extends StatefulWidget {
 }
 
 class _HomeScreenWebState extends State<HomeScreenWeb> {
-  bool isLike = false;
+  final homeData = SplashScreenState.welcome;
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +58,11 @@ class _HomeScreenWebState extends State<HomeScreenWeb> {
                     child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      itemCount:
-                          SplashScreenState.welcome?.categories?.length ?? 0,
+                      itemCount: homeData?.categories?.length ?? 0,
                       itemBuilder: (context, index) => CommonCategories(
                         height: 220,
                         width: 570,
-                        image:
-                            SplashScreenState.welcome?.categories?[index].image,
+                        image: homeData?.categories?[index].image,
                         title: SplashScreenState
                             .welcome
                             ?.categories?[index]
@@ -83,48 +80,38 @@ class _HomeScreenWebState extends State<HomeScreenWeb> {
                   const SizedBox(height: 20),
                   GridView.builder(
                     shrinkWrap: true,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 0.7,
-                      crossAxisSpacing: 30,
-                      mainAxisExtent: 270,
-                    ),
-                    itemCount: SplashScreenState.welcome?.topClass?.length ?? 0,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          childAspectRatio: 0.7,
+                          crossAxisSpacing: 30,
+                          mainAxisExtent: 270,
+                        ),
+                    itemCount: homeData?.topClass?.length ?? 0,
                     itemBuilder: (context, index) => CommonCard(
                       image:
                           "https://blog.nasm.org/hubfs/women-weight-lifting.jpg",
-                      title:
-                          SplashScreenState.welcome?.topClass?[index].title ??
-                          "",
+                      title: homeData?.topClass?[index].title ?? "",
                       subTitle:
                           SplashScreenState
                               .welcome
                               ?.topClass?[index]
                               .subTitle ??
                           "",
-                      address:
-                          SplashScreenState.welcome?.topClass?[index].address ??
-                          "",
-                      rating:
-                          SplashScreenState.welcome?.topClass?[index].rating ??
-                          0,
+                      address: homeData?.topClass?[index].address ?? "",
+                      rating: homeData?.topClass?[index].rating ?? 0,
                       isFav: SplashScreenState
                           .welcome
                           ?.topClass?[index]
                           .isFavourite,
                       distance:
                           double.tryParse(
-                            SplashScreenState
-                                    .welcome
-                                    ?.topClass?[index]
-                                    .distance ??
-                                "0",
+                            homeData?.topClass?[index].distance ?? "0",
                           ) ??
                           0.0,
                       onTap: () {
                         setState(() {
-                          final item =
-                              SplashScreenState.welcome?.topClass?[index];
+                          final item = homeData?.topClass?[index];
                           if (item == null) return; //check item not null
 
                           item.isFavourite = !(item.isFavourite ?? false);
@@ -132,36 +119,15 @@ class _HomeScreenWebState extends State<HomeScreenWeb> {
                           if (item.isFavourite == true) {
                             FavouriteController.favouriteList.add(
                               FavouriteModel(
-                                id: SplashScreenState
-                                    .welcome
-                                    ?.topClass?[index]
-                                    .id,
+                                id: homeData?.topClass?[index].id,
                                 image:
                                     "https://blog.nasm.org/hubfs/women-weight-lifting.jpg",
-                                title:
-                                    SplashScreenState
-                                        .welcome
-                                        ?.topClass?[index]
-                                        .title ??
-                                    "",
+                                title: homeData?.topClass?[index].title ?? "",
                                 address:
-                                    SplashScreenState
-                                        .welcome
-                                        ?.topClass?[index]
-                                        .address ??
-                                    "",
+                                    homeData?.topClass?[index].address ?? "",
                                 distance:
-                                    SplashScreenState
-                                        .welcome
-                                        ?.topClass?[index]
-                                        .distance ??
-                                    "0",
-                                rating:
-                                    SplashScreenState
-                                        .welcome
-                                        ?.topClass?[index]
-                                        .rating ??
-                                    0,
+                                    homeData?.topClass?[index].distance ?? "0",
+                                rating: homeData?.topClass?[index].rating ?? 0,
                                 isLike: true,
                               ),
                             );

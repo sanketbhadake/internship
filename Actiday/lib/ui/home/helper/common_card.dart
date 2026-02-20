@@ -1,9 +1,9 @@
-import 'package:actiday/ui/utils/widgets/common_size.dart';
+import 'package:actiday/ui/utils/theme/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import '../../utils/widgets/common_container.dart';
-import '../../utils/widgets/common_text.dart';
+import 'package:actiday/ui/utils/widgets/common_container.dart';
+import 'package:actiday/ui/utils/widgets/common_text.dart';
 
 class CommonCard extends StatefulWidget {
   final String image;
@@ -61,7 +61,7 @@ class _CommonCardState extends State<CommonCard> {
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return Image.asset(
-                    "assets/images/bookings.png",
+                    AppAssets.booking,
                     height: 180,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -77,8 +77,6 @@ class _CommonCardState extends State<CommonCard> {
           Positioned(
             top: 15,
             right: 25,
-
-            // right: -context.screenWidth*0.2,
             child: GestureDetector(
               onTap: widget.onTap,
               child: CircleAvatar(
@@ -109,14 +107,14 @@ class _CommonCardState extends State<CommonCard> {
             decoration: BoxDecoration(
               border: Border.all(
                 width: 0.5,
-                color:  widget.isBooking
-                    ? Color(0xffD4D4D4)
+                color: widget.isBooking
+                    ? const Color(0xffD4D4D4)
                     : Colors.transparent,
               ),
               color: widget.isBooking
-                  ? Color(0xffFFFFFF)
+                  ? const Color(0xffFFFFFF)
                   : const Color(0xFFF8F8F8),
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(13),
                 bottomRight: Radius.circular(13),
               ),
@@ -160,10 +158,7 @@ class _CommonCardState extends State<CommonCard> {
                                   weight: FontWeight.bold,
                                 ),
                                 const SizedBox(width: 4),
-                                SvgPicture.asset(
-                                  "assets/svgs/star.svg",
-                                  height: 18,
-                                ),
+                                SvgPicture.asset(AppAssets.star, height: 18),
                                 const SizedBox(width: 20),
                               ],
                             ),
@@ -178,8 +173,8 @@ class _CommonCardState extends State<CommonCard> {
                     ),
                   ),
                   (widget.isBooking)
-                      ? Divider(thickness: 0.5)
-                      : SizedBox(height: 5),
+                      ? const Divider(thickness: 0.5)
+                      : const SizedBox(height: 5),
 
                   /// Bottom Row
                   widget.isBooking
@@ -217,12 +212,10 @@ class _CommonCardState extends State<CommonCard> {
                       : Row(
                           children: [
                             const Icon(Icons.location_on, color: Colors.grey),
-
                             Flexible(
                               child: CommonText(
                                 text:
-                                    "${widget.address} (${widget.distance.toString()} Km)" ??
-                                    "0",
+                                    "${widget.address} (${widget.distance.toString()} Km)",
                                 fontSize: 12,
                                 color: Colors.grey,
                               ),

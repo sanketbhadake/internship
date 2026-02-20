@@ -1,6 +1,6 @@
 import 'package:actiday/ui/Booking/web/past_tab_web.dart';
 import 'package:actiday/ui/Booking/web/upcoming_tab_web.dart';
-import 'package:actiday/ui/utils/widgets/common_footer.dart';
+import 'package:actiday/ui/utils/theme/app_assets.dart';
 import 'package:actiday/ui/utils/widgets/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,22 +16,26 @@ class _BookingWebState extends State<BookingWeb> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
+      body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 50),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                SvgPicture.asset("assets/svgs/home.svg"),
-                Icon(Icons.arrow_forward_ios_outlined),
-                CommonText(text: "Booking", fontSize: 12),
+                SvgPicture.asset(AppAssets.homeSvg),
+                const Icon(Icons.arrow_forward_ios_outlined),
+                const CommonText(text: "Booking", fontSize: 12),
               ],
             ),
-            SizedBox(height: 20),
-            CommonText(text: "Booking", fontSize: 14, weight: FontWeight.bold),
+            const SizedBox(height: 20),
+            const CommonText(
+              text: "Booking",
+              fontSize: 14,
+              weight: FontWeight.bold,
+            ),
 
-            Expanded(
+            const Expanded(
               child: DefaultTabController(
                 length: 2,
                 child: Column(
@@ -44,7 +48,7 @@ class _BookingWebState extends State<BookingWeb> {
                       indicatorColor: Colors.transparent,
                       unselectedLabelColor: Colors.grey,
                       dividerColor: Colors.transparent,
-                      tabs: const [
+                      tabs: [
                         Tab(text: "Upcoming"),
                         Tab(text: "Past"),
                       ],
@@ -59,8 +63,6 @@ class _BookingWebState extends State<BookingWeb> {
                 ),
               ),
             ),
-
-            //CommonFooter(),
           ],
         ),
       ),

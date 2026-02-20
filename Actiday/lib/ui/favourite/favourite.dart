@@ -15,10 +15,10 @@ class _FavouriteState extends State<Favourite> {
   Widget build(BuildContext context) {
     return ScreenTypeLayout.builder(
       mobile: (BuildContext context) {
-        return FavouriteMobile();
+        return const FavouriteMobile();
       },
       desktop: (BuildContext context) {
-        return FavouriteWeb();
+        return const FavouriteWeb();
       },
     );
   }

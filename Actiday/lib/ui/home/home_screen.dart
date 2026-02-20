@@ -1,9 +1,7 @@
-
+import 'package:actiday/ui/home/mobile/home_Screen_mobile.dart';
 import 'package:actiday/ui/home/web/home_screen_web.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:flutter/material.dart';
-
-import 'mobile/home_Screen_mobile.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,10 +15,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return ScreenTypeLayout.builder(
       mobile: (BuildContext context) {
-        return HomeScreenMobile();
+        return const HomeScreenMobile();
       },
       desktop: (BuildContext context) {
-        return HomeScreenWeb();
+        return const HomeScreenWeb();
       },
     );
   }

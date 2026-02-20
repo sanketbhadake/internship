@@ -17,10 +17,10 @@ class _BasedClassState extends State<BasedClass> {
   Widget build(BuildContext context) {
     return ScreenTypeLayout.builder(
       mobile: (BuildContext context) {
-        return BasedClassMobile();
+        return const BasedClassMobile();
       },
       desktop: (BuildContext context) {
-        return BasedClassWeb();
+        return const BasedClassWeb();
       },
     );
   }

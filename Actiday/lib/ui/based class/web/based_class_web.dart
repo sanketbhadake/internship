@@ -1,13 +1,11 @@
 import 'package:actiday/ui/utils/widgets/common_container.dart';
-import 'package:actiday/ui/utils/widgets/common_footer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../framework/controller/based controller/bottom_list.dart';
-import '../../login/login_screen.dart';
-import '../../utils/theme/app_colors.dart';
-import '../../utils/widgets/common_text.dart';
-import '../based_class.dart';
+import 'package:actiday/framework/controller/based%20controller/bottom_list.dart';
+import 'package:actiday/ui/login/login_screen.dart';
+import 'package:actiday/ui/utils/theme/app_colors.dart';
+import 'package:actiday/ui/utils/widgets/common_text.dart';
+import 'package:actiday/ui/based%20class/based_class.dart';
 
 class BasedClassWeb extends StatefulWidget {
   const BasedClassWeb({super.key});
@@ -30,8 +28,8 @@ class _BasedClassWebState extends State<BasedClassWeb> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CommonText(text: "Are you sure to Logout", fontSize: 16),
-                SizedBox(height: 10),
+                const CommonText(text: "Are you sure to Logout", fontSize: 16),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -39,7 +37,7 @@ class _BasedClassWebState extends State<BasedClassWeb> {
                       onTap: () {
                         Navigator.of(context).pop();
                       },
-                      child: CommonContainer(
+                      child: const CommonContainer(
                         height: 30,
                         width: 80,
                         borderRadius: 10,
@@ -54,17 +52,17 @@ class _BasedClassWebState extends State<BasedClassWeb> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
+                            builder: (context) => const LoginScreen(),
                           ),
                           (route) => false,
                         );
                       },
-                      child: CommonContainer(
+                      child: const CommonContainer(
                         height: 30,
                         width: 80,
                         borderRadius: 10,
@@ -98,7 +96,7 @@ class _BasedClassWebState extends State<BasedClassWeb> {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.only(left: 80.0),
-          child: SvgPicture.asset("assets/svgs/logo black.svg"),
+          child: SvgPicture.asset("assets/svgs/svg_logo black.svg"),
         ),
         leadingWidth: 160,
         title: Row(
@@ -128,25 +126,25 @@ class _BasedClassWebState extends State<BasedClassWeb> {
             padding: const EdgeInsets.only(right: 80.0),
             child: Row(
               children: [
-                Icon(Icons.search_sharp),
-                SizedBox(width: 15),
-                Icon(Icons.notifications_outlined),
-                SizedBox(width: 15),
+                const Icon(Icons.search_sharp),
+                const SizedBox(width: 15),
+                const Icon(Icons.notifications_outlined),
+                const SizedBox(width: 15),
                 CircleAvatar(
                   radius: 20,
 
                   backgroundColor: Colors.orange,
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
-                    child: Image.asset("assets/images/profile.png"),
+                    child: Image.asset("assets/images/ic_profile.png"),
                   ),
                 ),
-                SizedBox(width: 15),
+                const SizedBox(width: 15),
                 GestureDetector(
                   onTap: () {
                     showAlertBoxModel();
                   },
-                  child: Icon(Icons.logout_outlined),
+                  child: const Icon(Icons.logout_outlined),
                 ),
               ],
             ),

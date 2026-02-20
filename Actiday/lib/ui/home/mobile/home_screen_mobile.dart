@@ -1,17 +1,16 @@
 import 'package:actiday/framework/controller/favourite/favourite_controller.dart';
-import 'package:actiday/framework/controller/home/home_controller.dart';
 import 'package:actiday/framework/repository/favourite/favourite_model.dart';
 import 'package:actiday/ui/home/helper/common_card.dart';
 import 'package:actiday/ui/home/helper/common_carousel.dart';
 import 'package:actiday/ui/home/helper/common_categories.dart';
 import 'package:actiday/ui/login/login_screen.dart';
+import 'package:actiday/ui/splash/splash_screen.dart';
 import 'package:actiday/ui/utils/theme/app_assets.dart';
 import 'package:actiday/ui/utils/widgets/common_container.dart';
+import 'package:actiday/ui/utils/widgets/common_text.dart';
 import 'package:actiday/ui/utils/widgets/common_textform.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../splash/splash_screen.dart';
-import '../../utils/widgets/common_text.dart';
 
 class HomeScreenMobile extends StatefulWidget {
   const HomeScreenMobile({super.key});
@@ -21,11 +20,9 @@ class HomeScreenMobile extends StatefulWidget {
 }
 
 class _HomeScreenMobileState extends State<HomeScreenMobile> {
-  bool isLike = false;
-  final item = HomeController.item;
-  int indexat = 0;
+  final homeData = SplashScreenState.welcome;
 
-  /// make list in controller
+  /// AlertBox
   void showAlertBoxModel() {
     showDialog(
       context: context,
@@ -105,10 +102,9 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
             GestureDetector(
               onTap: () {
                 Navigator.of(context).pop();
-                Future.delayed(const Duration(milliseconds: 50),(){
+                Future.delayed(const Duration(milliseconds: 50), () {
                   showAlertBoxModel();
                 });
-                // showAlertBoxModel();
               },
               child: const ListTile(
                 title: CommonText(text: "Logout", fontSize: 14),
@@ -138,7 +134,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
             CommonText(text: "Abu Dhabi, UAE", fontSize: 12),
           ],
         ),
-        actions:  const [
+        actions: const [
           Padding(
             padding: EdgeInsets.only(right: 20.0),
             child: Icon(Icons.notifications_outlined),
@@ -176,17 +172,14 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                 child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: SplashScreenState.welcome?.categories?.length ?? 0,
+                  itemCount: homeData?.categories?.length ?? 0,
 
                   itemBuilder: (context, index) => CommonCategories(
                     height: 120,
                     width: 175,
-                    image: SplashScreenState.welcome?.categories?[index].image,
+                    image: homeData?.categories?[index].image,
 
-                    title: SplashScreenState
-                        .welcome
-                        ?.categories?[index]
-                        .categoryName,
+                    title: homeData?.categories?[index].categoryName,
                   ),
                 ),
               ),
@@ -212,52 +205,27 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: SplashScreenState.welcome?.topClass?.length ?? 0,
-
+                itemCount: homeData?.topClass?.length ?? 0,
                 itemBuilder: (context, index) {
-                  indexat = index;
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 15),
                     child: CommonCard(
                       image:
                           "https://blog.nasm.org/hubfs/women-weight-lifting.jpg",
-
-                      title:
-                          SplashScreenState.welcome?.topClass?[index].title ??
-                          "",
-
-                      subTitle:
-                          SplashScreenState
-                              .welcome
-                              ?.topClass?[index]
-                              .subTitle ??
-                          "",
-                      address:
-                          SplashScreenState.welcome?.topClass?[index].address ??
-                          "",
-                      rating:
-                          SplashScreenState.welcome?.topClass?[index].rating ??
-                          0,
-                      isFav: SplashScreenState
-                          .welcome
-                          ?.topClass?[index]
-                          .isFavourite,
+                      title: homeData?.topClass?[index].title ?? "",
+                      subTitle: homeData?.topClass?[index].subTitle ?? "",
+                      address: homeData?.topClass?[index].address ?? "",
+                      rating: homeData?.topClass?[index].rating ?? 0,
+                      isFav: homeData?.topClass?[index].isFavourite,
                       distance:
                           double.tryParse(
-                            SplashScreenState
-                                    .welcome
-                                    ?.topClass?[index]
-                                    .distance ??
-                                "0",
+                            homeData?.topClass?[index].distance ?? "0",
                           ) ??
                           0.0,
                       onTap: () {
                         setState(() {
-                          final item =
-                              SplashScreenState.welcome?.topClass?[index];
-
+                          final item = homeData?.topClass?[index];
                           if (item == null) return;
-
                           item.isFavourite = !(item.isFavourite ?? false);
 
                           if (item.isFavourite == true) {

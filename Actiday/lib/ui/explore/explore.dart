@@ -15,10 +15,10 @@ class _ExploreState extends State<Explore> {
   Widget build(BuildContext context) {
     return ScreenTypeLayout.builder(
       mobile: (BuildContext context) {
-        return ExploreMobile();
+        return const ExploreMobile();
       },
       desktop: (BuildContext context) {
-        return ExploreWeb();
+        return const ExploreWeb();
       },
     );
   }

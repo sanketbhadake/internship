@@ -1,11 +1,11 @@
 import 'package:actiday/framework/controller/favourite/favourite_controller.dart';
 import 'package:actiday/ui/splash/splash_screen.dart';
+import 'package:actiday/ui/utils/theme/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../home/helper/common_card.dart';
-import '../../utils/widgets/common_footer.dart';
-import '../../utils/widgets/common_text.dart';
+import 'package:actiday/ui/home/helper/common_card.dart';
+import 'package:actiday/ui/utils/widgets/common_footer.dart';
+import 'package:actiday/ui/utils/widgets/common_text.dart';
 
 class FavouriteWeb extends StatefulWidget {
   const FavouriteWeb({super.key});
@@ -31,20 +31,20 @@ class _FavouriteWebState extends State<FavouriteWeb> {
                 children: [
                   Row(
                     children: [
-                      SvgPicture.asset("assets/svgs/home.svg"),
-                      Icon(Icons.arrow_forward_ios_outlined),
-                      CommonText(text: "Favourite", fontSize: 12),
+                      SvgPicture.asset(AppAssets.homeSvg),
+                      const Icon(Icons.arrow_forward_ios_outlined),
+                      const CommonText(text: "Favourite", fontSize: 12),
                     ],
                   ),
-                  SizedBox(height: 20),
-                  CommonText(
+                  const SizedBox(height: 20),
+                  const CommonText(
                     text: "Favourite",
                     fontSize: 16,
                     weight: FontWeight.bold,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   FavouriteController.favouriteList.isEmpty
-                      ? Center(
+                      ? const Center(
                           child: CommonText(
                             text: "No Favourite found",
                             fontSize: 18,
@@ -53,11 +53,11 @@ class _FavouriteWebState extends State<FavouriteWeb> {
                         )
                       : GridView.builder(
                           gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3,
                                 childAspectRatio: 0.7,
                                 crossAxisSpacing: 30,
-                                mainAxisExtent: 290
+                                mainAxisExtent: 290,
                               ),
                           shrinkWrap: true,
                           itemCount: FavouriteController.favouriteList.length,
@@ -79,14 +79,21 @@ class _FavouriteWebState extends State<FavouriteWeb> {
                                 isFav: item[index].isLike,
                                 onTap: () {
                                   setState(() {
-                                    final removeItem = FavouriteController.favouriteList[index];
+                                    final removeItem = FavouriteController
+                                        .favouriteList[index];
                                     // SplashScreenState.welcome?.topClass?[index];
 
-                                    final homeItem=SplashScreenState.welcome?.topClass?.firstWhere((fav)=>fav.id==removeItem.id);
+                                    final homeItem = SplashScreenState
+                                        .welcome
+                                        ?.topClass
+                                        ?.firstWhere(
+                                          (fav) => fav.id == removeItem.id,
+                                        );
 
-                                   homeItem?.isFavourite=false;
-                                   FavouriteController.favouriteList.removeAt(index);
-
+                                    homeItem?.isFavourite = false;
+                                    FavouriteController.favouriteList.removeAt(
+                                      index,
+                                    );
                                   });
                                 },
                               ),
@@ -97,9 +104,9 @@ class _FavouriteWebState extends State<FavouriteWeb> {
               ),
             ),
             FavouriteController.favouriteList.isEmpty
-                ? SizedBox(height: 200)
-                : SizedBox(height: 1),
-            CommonFooter(),
+                ? const SizedBox(height: 250)
+                : const SizedBox(height: 1),
+            const CommonFooter(),
           ],
         ),
       ),

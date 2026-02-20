@@ -1,14 +1,13 @@
-import 'package:actiday/ui/splash/mobile/splash_screen_mobile.dart';
+import 'package:actiday/ui/utils/theme/app_assets.dart';
 import 'package:actiday/ui/utils/widgets/common_footer.dart';
 import 'package:actiday/ui/utils/widgets/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../../framework/controller/based controller/bottom_list.dart';
-import '../../../based class/based_class.dart';
-import '../../../splash/splash_screen.dart';
-import '../../../utils/theme/app_colors.dart';
-import '../../../utils/widgets/common_container.dart';
+import 'package:actiday/framework/controller/based%20controller/bottom_list.dart';
+import 'package:actiday/ui/based%20class/based_class.dart';
+import 'package:actiday/ui/splash/splash_screen.dart';
+import 'package:actiday/ui/utils/theme/app_colors.dart';
+import 'package:actiday/ui/utils/widgets/common_container.dart';
 
 class BookingDetailWeb extends StatefulWidget {
   final bool upcoming;
@@ -43,7 +42,7 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.only(left: 80.0),
-          child: SvgPicture.asset("assets/svgs/logo black.svg"),
+          child: SvgPicture.asset("assets/svgs/svg_logo black.svg"),
         ),
         leadingWidth: 160,
         title: Row(
@@ -73,25 +72,23 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
             padding: const EdgeInsets.only(right: 80.0),
             child: Row(
               children: [
-                Icon(Icons.search_sharp),
-                SizedBox(width: 15),
-                Icon(Icons.notifications_outlined),
-                SizedBox(width: 15),
+                const Icon(Icons.search_sharp),
+                const SizedBox(width: 15),
+                const Icon(Icons.notifications_outlined),
+                const SizedBox(width: 15),
                 CircleAvatar(
                   radius: 20,
 
                   backgroundColor: Colors.orange,
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
-                    child: Image.asset("assets/images/profile.png"),
+                    child: Image.asset(AppAssets.profile),
                   ),
                 ),
-                SizedBox(width: 15),
+                const SizedBox(width: 15),
                 GestureDetector(
-                  onTap: () {
-                    // showAlertBoxModel();
-                  },
-                  child: Icon(Icons.logout_outlined),
+                  onTap: () {},
+                  child: const Icon(Icons.logout_outlined),
                 ),
               ],
             ),
@@ -106,26 +103,29 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 50),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 100.0,
+                vertical: 50,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
                       InkWell(
-                        onTap:(){
+                        onTap: () {
                           Navigator.of(context).pop();
-
                         },
-                          child: SvgPicture.asset("assets/svgs/home.svg")),
-                      Icon(Icons.arrow_forward_ios_outlined),
-                      CommonText(text: "Booking", fontSize: 12),
-                      Icon(Icons.arrow_forward_ios_outlined),
-                      CommonText(text: "Booking Details ", fontSize: 12),
+                        child: SvgPicture.asset(AppAssets.homeSvg),
+                      ),
+                      const Icon(Icons.arrow_forward_ios_outlined),
+                      const CommonText(text: "Booking", fontSize: 12),
+                      const Icon(Icons.arrow_forward_ios_outlined),
+                      const CommonText(text: "Booking Details ", fontSize: 12),
                     ],
                   ),
-                  SizedBox(height: 20),
-                  CommonText(
+                  const SizedBox(height: 20),
+                  const CommonText(
                     text: "Booking Details",
                     fontSize: 14,
                     weight: FontWeight.bold,
@@ -138,20 +138,18 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                           CommonContainer(
                             // height: 250,
                             width: 800,
-                            color: Color(0xffFCFCFC),
-              
+                            color: const Color(0xffFCFCFC),
                             borderRadius: 16,
-              
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(height: 20),
+                                const SizedBox(height: 20),
                                 CommonContainer(
                                   height: 71,
-                                  color: Color(0xffFCFCFC),
+                                  color: const Color(0xffFCFCFC),
                                   child: Row(
                                     children: [
-                                      SizedBox(width: 90),
+                                      const SizedBox(width: 90),
                                       Flexible(
                                         child: ListTile(
                                           title: CommonText(
@@ -161,27 +159,32 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                                           subtitle: Row(
                                             children: [
                                               SvgPicture.asset(
-                                                "assets/svgs/svg_location.svg",
+                                                AppAssets.locationSvg,
                                               ),
                                               CommonText(
                                                 text: item?.address ?? '',
                                                 color: Colors.grey,
                                                 fontSize: 12,
                                               ),
-                                              SizedBox(width: 5),
-                                              CommonText(text: '.', fontSize: 12),
-                                              SizedBox(width: 5),
+                                              const SizedBox(width: 5),
+                                              const CommonText(
+                                                text: '.',
+                                                fontSize: 12,
+                                              ),
+                                              const SizedBox(width: 5),
                                               CommonText(
-                                                text: item?.rating.toString() ?? '',
+                                                text:
+                                                    item?.rating.toString() ??
+                                                    '',
                                                 fontSize: 14,
                                               ),
-                                              SizedBox(width: 5),
-                                              Icon(Icons.star, size: 16),
+                                              const SizedBox(width: 5),
+                                              const Icon(Icons.star, size: 16),
                                             ],
                                           ),
                                         ),
                                       ),
-                                      // Spacer(),
+
                                       CommonContainer(
                                         borderRadius: 14,
                                         height: 23,
@@ -199,12 +202,15 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(height: 20),
-                                CommonContainer(height: 34, child: Divider()),
-              
+                                const SizedBox(height: 20),
+                                const CommonContainer(
+                                  height: 34,
+                                  child: Divider(),
+                                ),
+
                                 CommonContainer(
                                   height: 142,
-              
+
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: 16.0,
@@ -218,7 +224,7 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                                               text: item?.category ?? '',
                                               fontSize: 12,
                                             ),
-                                            Spacer(),
+                                            const Spacer(),
                                             CommonText(
                                               text: "${item?.credit} Credit",
                                               weight: FontWeight.bold,
@@ -226,32 +232,32 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(height: 5),
+                                        const SizedBox(height: 5),
                                         Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.watch_later_outlined,
                                               size: 16,
                                               color: Color(0xff232323),
                                             ),
-                                            SizedBox(width: 5),
+                                            const SizedBox(width: 5),
                                             CommonText(
                                               text: item?.time ?? '',
-              
-                                              color: Color(0xff232323),
+
+                                              color: const Color(0xff232323),
                                               fontSize: 12,
                                             ),
                                           ],
                                         ),
-                                        SizedBox(height: 5),
-              
+                                        const SizedBox(height: 5),
+
                                         Row(
                                           children: [
-                                            CommonText(
+                                            const CommonText(
                                               text: "Specialist",
                                               fontSize: 12,
                                             ),
-                                            Spacer(),
+                                            const Spacer(),
                                             CommonText(
                                               text: item?.specialist ?? '',
                                               weight: FontWeight.bold,
@@ -259,15 +265,15 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(height: 5),
-              
+                                        const SizedBox(height: 5),
+
                                         Row(
                                           children: [
-                                            CommonText(
+                                            const CommonText(
                                               text: "Timeslot",
                                               fontSize: 12,
                                             ),
-                                            Spacer(),
+                                            const Spacer(),
                                             CommonText(
                                               text: item?.timeSlot ?? '',
                                               weight: FontWeight.bold,
@@ -275,15 +281,15 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(height: 5),
-              
+                                        const SizedBox(height: 5),
+
                                         Row(
                                           children: [
-                                            CommonText(
+                                            const CommonText(
                                               text: "Booking ID",
                                               fontSize: 12,
                                             ),
-                                            Spacer(),
+                                            const Spacer(),
                                             CommonText(
                                               text: item?.bookingId ?? '',
                                               weight: FontWeight.bold,
@@ -305,19 +311,16 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                               height: 85,
                               width: 85,
                               borderRadius: 13,
-                              child: Image.asset(
-                                "assets/images/booking_detail.png",
-                              ),
+                              child: Image.asset(AppAssets.bookingDetail),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(width: 40,),
+                      const SizedBox(width: 40),
                       Visibility(
-                        visible: widget.past?? false,
+                        visible: widget.past ?? false,
                         child: CommonContainer(
-
-                          color: Color(0xffFCFCFC),
+                          color: const Color(0xffFCFCFC),
                           borderRadius: 30,
                           child: Padding(
                             padding: const EdgeInsets.all(25.0),
@@ -329,14 +332,13 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                                   weight: FontWeight.bold,
                                   fontSize: 14,
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Row(
                                   children: [
                                     GestureDetector(
                                       onTap: () {
                                         setState(() {
                                           rateIndex = 1;
-              
                                         });
                                       },
                                       child: CommonContainer(
@@ -347,34 +349,45 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                                             : Colors.grey,
                                         borderRadius: 13,
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
-                                            CommonText(text: '1', fontSize: 13,color: (rateIndex == 1)
-                                                ? Colors.pink
-                                                : Colors.grey,),
+                                            CommonText(
+                                              text: '1',
+                                              fontSize: 13,
+                                              color: (rateIndex == 1)
+                                                  ? Colors.pink
+                                                  : Colors.grey,
+                                            ),
                                             (rateIndex == 1)
-                                                ? SvgPicture.asset("assets/svgs/star.svg")
-                                                : SvgPicture.asset("assets/svgs/grey_star.svg"),
+                                                ? SvgPicture.asset(
+                                                    AppAssets.star,
+                                                  )
+                                                : SvgPicture.asset(
+                                                    AppAssets.greyStar,
+                                                  ),
                                           ],
                                         ),
                                       ),
                                     ),
-                                    SizedBox(width: 10,
+                                    const SizedBox(width: 10),
+                                    CommonText(
+                                      text: "Bad",
+                                      fontSize: 14,
+                                      color: (rateIndex == 1)
+                                          ? Colors.pink
+                                          : Colors.grey,
                                     ),
-                                    CommonText(text: "Bad", fontSize: 14,color: (rateIndex == 1)
-                                        ? Colors.pink
-                                        : Colors.grey,)
                                   ],
                                 ),
-                                SizedBox(height: 10,),
-              
+                                const SizedBox(height: 10),
+
                                 Row(
                                   children: [
                                     GestureDetector(
                                       onTap: () {
                                         setState(() {
                                           rateIndex = 2;
-              
                                         });
                                       },
                                       child: CommonContainer(
@@ -385,34 +398,45 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                                             : Colors.grey,
                                         borderRadius: 13,
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
-                                            CommonText(text: '2', fontSize: 13,color: (rateIndex == 2)
-                                                ? Colors.pink
-                                                : Colors.grey,),
+                                            CommonText(
+                                              text: '2',
+                                              fontSize: 13,
+                                              color: (rateIndex == 2)
+                                                  ? Colors.pink
+                                                  : Colors.grey,
+                                            ),
                                             (rateIndex == 2)
-                                                ? SvgPicture.asset("assets/svgs/star.svg")
-                                                : SvgPicture.asset("assets/svgs/grey_star.svg"),
+                                                ? SvgPicture.asset(
+                                                    AppAssets.star,
+                                                  )
+                                                : SvgPicture.asset(
+                                                    AppAssets.greyStar,
+                                                  ),
                                           ],
                                         ),
                                       ),
                                     ),
-                                    SizedBox(width: 10,
+                                    const SizedBox(width: 10),
+                                    CommonText(
+                                      text: "Better",
+                                      fontSize: 14,
+                                      color: (rateIndex == 2)
+                                          ? Colors.pink
+                                          : Colors.grey,
                                     ),
-                                    CommonText(text: "Better", fontSize: 14,color: (rateIndex == 2)
-                                        ? Colors.pink
-                                        : Colors.grey,)
                                   ],
                                 ),
-                                SizedBox(height: 10,),
-              
+                                const SizedBox(height: 10),
+
                                 Row(
                                   children: [
                                     GestureDetector(
                                       onTap: () {
                                         setState(() {
                                           rateIndex = 3;
-              
                                         });
                                       },
                                       child: CommonContainer(
@@ -423,34 +447,45 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                                             : Colors.grey,
                                         borderRadius: 13,
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
-                                            CommonText(text: '3', fontSize: 13,color: (rateIndex == 3)
-                                                ? Colors.pink
-                                                : Colors.grey,),
+                                            CommonText(
+                                              text: '3',
+                                              fontSize: 13,
+                                              color: (rateIndex == 3)
+                                                  ? Colors.pink
+                                                  : Colors.grey,
+                                            ),
                                             (rateIndex == 3)
-                                                ? SvgPicture.asset("assets/svgs/star.svg")
-                                                : SvgPicture.asset("assets/svgs/grey_star.svg"),
+                                                ? SvgPicture.asset(
+                                                    AppAssets.star,
+                                                  )
+                                                : SvgPicture.asset(
+                                                    AppAssets.greyStar,
+                                                  ),
                                           ],
                                         ),
                                       ),
                                     ),
-                                    SizedBox(width: 10,
+                                    const SizedBox(width: 10),
+                                    CommonText(
+                                      text: "Good",
+                                      fontSize: 14,
+                                      color: (rateIndex == 3)
+                                          ? Colors.pink
+                                          : Colors.grey,
                                     ),
-                                    CommonText(text: "Good", fontSize: 14,color: (rateIndex == 3)
-                                        ? Colors.pink
-                                        : Colors.grey,)
                                   ],
                                 ),
-                                SizedBox(height: 10,),
-              
+                                const SizedBox(height: 10),
+
                                 Row(
                                   children: [
                                     GestureDetector(
                                       onTap: () {
                                         setState(() {
                                           rateIndex = 4;
-              
                                         });
                                       },
                                       child: CommonContainer(
@@ -461,33 +496,44 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                                             : Colors.grey,
                                         borderRadius: 13,
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
-                                            CommonText(text: '4', fontSize: 13,color: (rateIndex == 4)
-                                                ? Colors.pink
-                                                : Colors.grey,),
+                                            CommonText(
+                                              text: '4',
+                                              fontSize: 13,
+                                              color: (rateIndex == 4)
+                                                  ? Colors.pink
+                                                  : Colors.grey,
+                                            ),
                                             (rateIndex == 4)
-                                                ? SvgPicture.asset("assets/svgs/star.svg")
-                                           : SvgPicture.asset("assets/svgs/grey_star.svg"),
+                                                ? SvgPicture.asset(
+                                                    AppAssets.star,
+                                                  )
+                                                : SvgPicture.asset(
+                                                    AppAssets.greyStar,
+                                                  ),
                                           ],
                                         ),
                                       ),
                                     ),
-                                    SizedBox(width: 10,
+                                    const SizedBox(width: 10),
+                                    CommonText(
+                                      text: "Very Good",
+                                      fontSize: 14,
+                                      color: (rateIndex == 4)
+                                          ? Colors.pink
+                                          : Colors.grey,
                                     ),
-                                    CommonText(text: "Very Good", fontSize: 14,color: (rateIndex == 4)
-                                        ? Colors.pink
-                                        : Colors.grey,)
                                   ],
                                 ),
-                            SizedBox(height: 10,),
+                                const SizedBox(height: 10),
                                 Row(
                                   children: [
                                     GestureDetector(
                                       onTap: () {
                                         setState(() {
                                           rateIndex = 5;
-              
                                         });
                                       },
                                       child: CommonContainer(
@@ -498,27 +544,37 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                                             : Colors.grey,
                                         borderRadius: 13,
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
-                                            CommonText(text: '5', fontSize: 13,color: (rateIndex == 5)
-                                                ? Colors.pink
-                                                : Colors.grey,),
+                                            CommonText(
+                                              text: '5',
+                                              fontSize: 13,
+                                              color: (rateIndex == 5)
+                                                  ? Colors.pink
+                                                  : Colors.grey,
+                                            ),
                                             (rateIndex == 5)
-                                                ? SvgPicture.asset("assets/svgs/star.svg")
-                                                : SvgPicture.asset("assets/svgs/grey_star.svg"),
+                                                ? SvgPicture.asset(
+                                                    AppAssets.star,
+                                                  )
+                                                : SvgPicture.asset(
+                                                    AppAssets.greyStar,
+                                                  ),
                                           ],
                                         ),
                                       ),
                                     ),
-                                    SizedBox(width: 10,
+                                    const SizedBox(width: 10),
+                                    CommonText(
+                                      text: "Excellent",
+                                      fontSize: 12,
+                                      color: (rateIndex == 5)
+                                          ? Colors.pink
+                                          : Colors.grey,
                                     ),
-                                    CommonText(text: "Excellent", fontSize: 12,color: (rateIndex == 5)
-                                        ? Colors.pink
-                                        : Colors.grey,)
                                   ],
                                 ),
-              
-              
                               ],
                             ),
                           ),
@@ -526,19 +582,19 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
-                  CommonText(
+                  const SizedBox(height: 20),
+                  const CommonText(
                     text: "Payment Summary",
                     weight: FontWeight.bold,
                     fontSize: 14,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   CommonContainer(
                     height: 95,
                     width: 800,
-                    color: Color(0xffFCFCFC),
+                    color: const Color(0xffFCFCFC),
                     borderRadius: 13,
-              
+
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 16.0,
@@ -548,8 +604,8 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                         children: [
                           Row(
                             children: [
-                              CommonText(text: "Booking", fontSize: 12),
-                              Spacer(),
+                              const CommonText(text: "Booking", fontSize: 12),
+                              const Spacer(),
                               CommonText(
                                 text: "${item?.credit} Credit",
                                 weight: FontWeight.bold,
@@ -557,13 +613,16 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 4),
-                          Divider(),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
+                          const Divider(),
+                          const SizedBox(height: 4),
                           Row(
                             children: [
-                              CommonText(text: "Order Total", fontSize: 12),
-                              Spacer(),
+                              const CommonText(
+                                text: "Order Total",
+                                fontSize: 12,
+                              ),
+                              const Spacer(),
                               CommonText(
                                 text: "${item?.credit} Credit",
                                 weight: FontWeight.bold,
@@ -571,19 +630,19 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  CommonContainer(
+                  const SizedBox(height: 20),
+                  const CommonContainer(
                     height: 70,
                     width: 800,
                     color: Color(0xffFCFCFC),
                     borderRadius: 20,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                         horizontal: 16.0,
                         vertical: 15,
                       ),
@@ -596,14 +655,13 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Visibility(
                     visible: widget.past ?? false,
-                    child: CommonContainer(
+                    child: const CommonContainer(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-              
                           CommonText(
                             text: "Write Your Reviews",
                             weight: FontWeight.bold,
@@ -615,7 +673,7 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                             borderRadius: 30,
                             color: Color(0xffFCFCFC),
                             child: Padding(
-                              padding: const EdgeInsets.all(40.0),
+                              padding: EdgeInsets.all(40.0),
                               child: TextField(
                                 decoration: InputDecoration(
                                   hint: CommonText(
@@ -631,11 +689,11 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                       ),
                     ),
                   ),
-              
-                  SizedBox(height: 20),
+
+                  const SizedBox(height: 20),
                   Visibility(
                     visible: widget.upcoming,
-                    child: CommonContainer(
+                    child: const CommonContainer(
                       height: 50,
                       width: 212,
                       borderRadius: 25,
@@ -645,10 +703,10 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Visibility(
                     visible: widget.past ?? false,
-                    child: CommonContainer(
+                    child: const CommonContainer(
                       height: 55,
                       width: 212,
                       borderRadius: 25,
@@ -662,11 +720,11 @@ class _BookingDetailWebState extends State<BookingDetailWeb> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                 ],
               ),
             ),
-            CommonFooter()
+            const CommonFooter(),
           ],
         ),
       ),

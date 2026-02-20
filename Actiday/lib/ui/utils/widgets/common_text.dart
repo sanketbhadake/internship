@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class CommonText extends StatelessWidget {
   final String text;
   final double fontSize;
@@ -22,17 +21,12 @@ class CommonText extends StatelessWidget {
     return Text(
       text,
       textAlign: center ? TextAlign.center : TextAlign.start,
-      style:
-          TextStyle(
-            fontFamily: 'Roboto',
-            fontSize: fontSize,
-              fontWeight: weight ?? FontWeight.w500,
-              color: color ?? Colors.black,
-
-          )
-
-
-
+      style: TextStyle(
+        fontFamily: 'Roboto',
+        fontSize: fontSize,
+        fontWeight: weight ?? FontWeight.w500,
+        color: color ?? Colors.black,
+      ),
     );
   }
 }

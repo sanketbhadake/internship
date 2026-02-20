@@ -1,10 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import '../../utils/theme/app_assets.dart';
-import '../../utils/widgets/common_container.dart';
+import 'package:actiday/ui/utils/theme/app_assets.dart';
+import 'package:actiday/ui/utils/widgets/common_container.dart';
 
 class CommonCarousel extends StatefulWidget {
   final bool showIndicator;
@@ -32,7 +30,6 @@ class _CommonCarouselState extends State<CommonCarousel> {
               child: Image.asset(
                 AppAssets.banner,
                 width: double.infinity,
-                // height: widget.height,
                 fit: BoxFit.fill,
               ),
             ),
@@ -40,9 +37,12 @@ class _CommonCarouselState extends State<CommonCarousel> {
               height: widget.height,
               borderRadius: 13,
 
-              child: Image.asset(AppAssets.banner,  width: double.infinity,
-                // height: widget.height,
-                fit: BoxFit.fill,),
+              child: Image.asset(
+                AppAssets.banner,
+                width: double.infinity,
+
+                fit: BoxFit.fill,
+              ),
             ),
           ],
           options: CarouselOptions(
@@ -67,7 +67,7 @@ class _CommonCarouselState extends State<CommonCarousel> {
             child: SmoothPageIndicator(
               controller: PageController(initialPage: _currentIndex),
               count: 2,
-              effect: ExpandingDotsEffect(
+              effect: const ExpandingDotsEffect(
                 dotColor: Colors.grey,
                 activeDotColor: Colors.black,
                 expansionFactor: 7,
