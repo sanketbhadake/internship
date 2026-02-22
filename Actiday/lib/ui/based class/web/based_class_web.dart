@@ -107,16 +107,14 @@ class _BasedClassWebState extends State<BasedClassWeb> {
             return InkWell(
               onTap: () {
                 setState(() {
-                  BottomList.bottomMenuList[lastItem].isSelect = false;
-                  data.isSelect = true;
                   BasedClass.selectIndex = data.id;
                 });
-                lastItem = data.id;
+
               },
               child: CommonText(
                 text: data.name,
-                fontSize: data.isSelect ? 14 : 12,
-                weight: data.isSelect ? FontWeight.bold : FontWeight.normal,
+                fontSize:  (BasedClass.selectIndex == data.id) ? 14 : 12,
+                weight: (BasedClass.selectIndex == data.id) ? FontWeight.bold : FontWeight.normal,
               ),
             );
           }).toList(),

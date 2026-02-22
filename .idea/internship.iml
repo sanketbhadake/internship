@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/ Intern_Test_sanket/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ Intern_Test_sanket/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ Intern_Test_sanket/build" />
+      <excludeFolder url="file://$MODULE_DIR$/Actiday/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/Actiday/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/Actiday/build" />
+      <excludeFolder url="file://$MODULE_DIR$/Actiday/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/Actiday/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/Actiday/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/build" />
+      <excludeFolder url="file://$MODULE_DIR$/Actiday/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/Actiday/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/Actiday/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/Actiday/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/Actiday/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/Actiday/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/build" />
+      <excludeFolder url="file://$MODULE_DIR$/Actiday/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/Actiday/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/Actiday/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/demo/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/demo/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/demo/build" />
+      <excludeFolder url="file://$MODULE_DIR$/doosy_customer/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/doosy_customer/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/doosy_customer/build" />
+      <excludeFolder url="file://$MODULE_DIR$/exam/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/exam/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/exam/build" />
+      <excludeFolder url="file://$MODULE_DIR$/pratice_ui/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/pratice_ui/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/pratice_ui/build" />
+      <excludeFolder url="file://$MODULE_DIR$/project/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/project/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/project/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

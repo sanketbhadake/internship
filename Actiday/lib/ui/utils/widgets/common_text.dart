@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CommonText extends StatelessWidget {
   final String text;
-  final double fontSize;
+  final double? fontSize;
   final Color? color;
   final FontWeight? weight;
   final bool center;
@@ -10,7 +10,7 @@ class CommonText extends StatelessWidget {
   const CommonText({
     super.key,
     required this.text,
-    required this.fontSize,
+      this.fontSize,
     this.center = false,
     this.color,
     this.weight,

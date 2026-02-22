@@ -9,6 +9,7 @@ class CommonContainer extends StatelessWidget {
   final Widget? child;
   final bool? shadow;
   final bool? gradient;
+  final BoxConstraints? constraints;
 
   const CommonContainer({
     super.key,
@@ -20,6 +21,7 @@ class CommonContainer extends StatelessWidget {
     this.height,
     this.width,
     this.gradient=false,
+    this.constraints,
   });
 
   @override
