@@ -34,7 +34,7 @@ class CommonContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadius),
         color: color,
         boxShadow:  shadow==true? [
-          BoxShadow(
+         const BoxShadow(
             spreadRadius: 0.3,
             color: Colors.grey,
             offset: Offset(0, 1),
