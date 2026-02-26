@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:kody_test/freamwork/repository/home/home_model.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'moible/home_mobile.dart';
@@ -18,9 +16,12 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout.builder(
-      mobile: (BuildContext context){
+      mobile: (BuildContext context) {
         return HomeMobile();
       },
     );
   }
 }
+
+
+

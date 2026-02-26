@@ -112,6 +112,7 @@ class _HomeMobileState extends ConsumerState<HomeMobile> {
                     ),
                   ),
                   appBar(context),
+
                 ],
               ),
             ),
@@ -147,6 +148,7 @@ Widget headerText(String title, bool isShow) {
     ),
   );
 }
+
 
 Widget appBar(BuildContext context) {
   return Stack(
