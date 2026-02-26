@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kody_test/freamwork/controller/based_controller.dart';
 import 'package:kody_test/freamwork/repository/home/home_model.dart';
+import 'package:kody_test/ui/utils/Widgets/common_button.dart';
 import 'package:kody_test/ui/utils/Widgets/common_container.dart';
 import 'package:kody_test/ui/utils/Widgets/common_net_image.dart';
 import 'package:kody_test/ui/utils/Widgets/common_sizedbox.dart';
@@ -12,8 +13,6 @@ import 'package:kody_test/ui/utils/Widgets/common_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../utils/Widgets/common_size.dart';
-
-int _currentIndex = 0;
 
 class HomeMobile extends ConsumerStatefulWidget {
   const HomeMobile({super.key});
@@ -31,12 +30,9 @@ class _HomeMobileState extends ConsumerState<HomeMobile> {
 
   @override
   Widget build(BuildContext context) {
-    final sizedWidth = MediaQuery.of(context).size.width;
-    final sizedHeight = MediaQuery.of(context).size.height;
     final updateState = ref.watch(controller);
     final item = updateState.welcome;
     return Scaffold(
-
       body: (updateState.welcome == null)
           ? Center(child: CircularProgressIndicator())
           : SafeArea(
@@ -48,49 +44,8 @@ class _HomeMobileState extends ConsumerState<HomeMobile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: 140),
-                        CarouselSlider(
-                          items: item?.banner?.map((data) {
-                            return Container(
-                              height: sizedHeight,
-                              width: sizedWidth,
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              clipBehavior: Clip.antiAlias,
-                              child: CommonNetworkImage(imageUrl: data),
-                            );
-                          }).toList(),
+                        carouselWidget(item, context, updateState),
 
-                          options: CarouselOptions(
-                            height: 120,
-                            viewportFraction: 0.7,
-                            autoPlay: true,
-                            autoPlayCurve: Curves.easeInOut,
-                            enlargeCenterPage: true,
-                            animateToClosest: true,
-                            onPageChanged: (index, reason) {
-                              setState(() {
-                                _currentIndex = index;
-                              });
-                            },
-                          ),
-                        ),
-                        Space.h20,
-                        Center(
-                          child: SmoothPageIndicator(
-                            controller: PageController(
-                              initialPage: _currentIndex,
-                            ),
-                            count: item?.banner?.length ?? 0,
-                            effect: ExpandingDotsEffect(
-                              dotHeight: 7,
-                              dotWidth: 7,
-                              expansionFactor: 7,
-                              activeDotColor: Colors.black,
-                            ),
-                          ),
-                        ),
                         headerText("Categories", false),
 
                         categories(item),
@@ -108,18 +63,33 @@ class _HomeMobileState extends ConsumerState<HomeMobile> {
                         headerText("All Stores", false),
 
                         allStore(item),
+
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: CommonButton(
+                            height: 52,
+                            title: "VIEW ALL RESTAURANTS",
+                            onTap: () {},
+                            color: Colors.black,
+                            txtColor: Colors.white,
+                            borderRadius: 23,
+                          ),
+                        ),
                       ],
                     ),
                   ),
                   appBar(context),
-
                 ],
               ),
             ),
 
       bottomNavigationBar: BottomNavigationBar(
         items: BasedController.navigation.map((data) {
-          return BottomNavigationBarItem(icon: data.icon, label: data.label);
+          return BottomNavigationBarItem(
+            icon: SvgPicture.asset(data.icon, color: Colors.grey),
+            label: data.label,
+            activeIcon: SvgPicture.asset(data.icon,color: Colors.black,)
+          );
         }).toList(),
         onTap: (index) {
           updateState.navIndex(index);
@@ -133,22 +103,75 @@ class _HomeMobileState extends ConsumerState<HomeMobile> {
   }
 }
 
+Widget carouselWidget(
+  Welcome? item,
+  BuildContext context,
+  BasedController updateState,
+) {
+  return Column(
+    children: [
+      CarouselSlider(
+        items: item?.banner?.map((data) {
+          return Container(
+            height: context.screenHeight,
+            width: context.screenWidth,
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: CommonNetworkImage(imageUrl: data),
+          );
+        }).toList(),
+
+        options: CarouselOptions(
+          height: 120,
+          viewportFraction: 0.7,
+          autoPlay: true,
+          autoPlayCurve: Curves.easeInOut,
+          enlargeCenterPage: true,
+          animateToClosest: true,
+          onPageChanged: (index, reason) {
+            updateState.getCurrentIndex(index);
+          },
+        ),
+      ),
+      Space.h20,
+      Center(
+        child: SmoothPageIndicator(
+          controller: PageController(
+            initialPage: BasedController.carouselIndex,
+          ),
+          count: item?.banner?.length ?? 0,
+          effect: ExpandingDotsEffect(
+            dotHeight: 7,
+            dotWidth: 7,
+            expansionFactor: 7,
+            activeDotColor: Colors.black,
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
 Widget headerText(String title, bool isShow) {
   return Padding(
     padding: const EdgeInsets.all(20.0),
     child: Row(
       children: [
-        CommonText(text: title,fontSize: 18, weight: FontWeight.bold),
+        CommonText(text: title, fontSize: 18, weight: FontWeight.bold),
         Spacer(),
         Visibility(
           visible: isShow,
-          child: InkWell(child: CommonText(text: "View ALL", weight: FontWeight.bold)),
+          child: InkWell(
+            child: CommonText(text: "View ALL", weight: FontWeight.bold),
+          ),
         ),
       ],
     ),
   );
 }
-
 
 Widget appBar(BuildContext context) {
   return Stack(
@@ -245,16 +268,18 @@ Widget categories(Welcome? item) {
           Container(
             height: 95,
             width: 95,
-            decoration: BoxDecoration(shape: BoxShape.circle,
-                color: Colors.white,
-                boxShadow:   [
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+              boxShadow: [
                 BoxShadow(
                   spreadRadius: 1,
                   color: Colors.grey,
                   offset: Offset(0, 1),
                   blurRadius: 7,
-                )
-                ]),
+                ),
+              ],
+            ),
             clipBehavior: Clip.antiAlias,
             child: CommonNetworkImage(
               imageUrl: item?.categories?[index].image ?? '',
@@ -457,8 +482,8 @@ Widget allStore(Welcome? item) {
         child: Stack(
           children: [
             CommonContainer(
-              shadow: true,
-              color: Colors.white,
+              // shadow: true,
+              // color: Colors.white,
               borderRadius: 14,
               child: Column(
                 children: [
@@ -466,7 +491,7 @@ Widget allStore(Welcome? item) {
                     height: 130,
                     borderRadius: 14,
                     width: double.infinity,
-
+                    color: Colors.white,
                     child: Image.network(
                       item?.stores?[index].banner ?? '',
                       width: double.infinity,
@@ -499,7 +524,8 @@ Widget allStore(Welcome? item) {
                           ),
                           Row(
                             children: [
-                              Icon(Icons.star),
+                              SvgPicture.asset("assets/svgs/svg_star.svg"),
+                              SizedBox(width: 3),
                               CommonText(
                                 text: item?.stores?[index].rating ?? '',
                               ),
@@ -509,7 +535,10 @@ Widget allStore(Welcome? item) {
                                 color: Colors.grey,
                               ),
                               Spacer(),
-                              Icon(Icons.timer),
+
+                              SvgPicture.asset("assets/svgs/svg_timer.svg"),
+                              SizedBox(width: 3),
+
                               CommonText(
                                 text: item?.stores?[index].deliveryTime ?? '',
                                 color: Colors.grey,
@@ -528,7 +557,11 @@ Widget allStore(Welcome? item) {
                               ),
 
                               Spacer(),
-                              Icon(Icons.location_on),
+
+                              SvgPicture.asset(
+                                "assets/svgs/svg_google_map.svg",
+                              ),
+                              SizedBox(width: 3),
                               CommonText(
                                 text: item?.stores?[index].distance ?? '',
                                 color: Colors.grey,
@@ -569,6 +602,11 @@ Widget allStore(Welcome? item) {
                   ),
                 ],
               ),
+            ),
+            Positioned(
+              top: -2,
+              right: 20,
+              child: SvgPicture.asset("assets/svgs/svg_tag.svg"),
             ),
             Positioned(
               top: 15,
