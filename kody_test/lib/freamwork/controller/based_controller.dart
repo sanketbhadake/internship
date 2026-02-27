@@ -4,13 +4,14 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kody_test/freamwork/repository/based_model.dart';
 import 'package:kody_test/freamwork/repository/home/home_model.dart';
+import 'package:kody_test/ui/utils/theme/app_assets.dart';
 
 import '../../ui/home/home.dart';
 
 final controller = ChangeNotifierProvider((ref) => BasedController());
 
 class BasedController extends ChangeNotifier {
-  Welcome? welcome;
+  HomeModel? welcome;
   static int carouselIndex = 0;
   bool isSelectd= false;
 
@@ -40,34 +41,33 @@ class BasedController extends ChangeNotifier {
   static List<BasedModel> navigation = [
     BasedModel(
       label: "home",
-      icon: "assets/svgs/svg_home.svg",
+      icon: AppAssets.svgBottomHome,
       id: 0,
       screen: HomeScreen(),
-      isSelectd: false,
 
     ),
     BasedModel(
       label: "order",
-      icon:  "assets/svgs/svg_bottom_category.svg",
+      icon:   AppAssets.svgBottomCartSvg,
       id: 1,
       screen: HomeScreen(),
-      isSelectd: false,
+
 
     ),
     BasedModel(
       label: "cart",
-      icon:  "assets/svgs/svg_cart.svg",
+      icon:  AppAssets.svgBottomCartSvg,
       id: 2,
       screen: HomeScreen(),
-      isSelectd: false,
+
 
     ),
     BasedModel(
       label: "profile",
-      icon: "assets/svgs/svg_profile.svg",
+      icon: AppAssets.svgBottomProfile,
       id: 3,
       screen: HomeScreen(),
-      isSelectd: false,
+
 
     ),
   ];

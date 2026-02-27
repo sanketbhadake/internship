@@ -2,11 +2,11 @@
 
 import 'dart:convert';
 
-Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
+HomeModel welcomeFromJson(String str) => HomeModel.fromJson(json.decode(str));
 
-String welcomeToJson(Welcome data) => json.encode(data.toJson());
+String welcomeToJson(HomeModel data) => json.encode(data.toJson());
 
-class Welcome {
+class HomeModel {
   List<String>? banner;
   List<Category>? categories;
   List<Category>? recentOrders;
@@ -14,7 +14,7 @@ class Welcome {
   List<Category>? spotlight;
   List<Store>? stores;
 
-  Welcome({
+  HomeModel({
     this.banner,
     this.categories,
     this.recentOrders,
@@ -23,7 +23,7 @@ class Welcome {
     this.stores,
   });
 
-  factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+  factory HomeModel.fromJson(Map<String, dynamic> json) => HomeModel(
     banner: json["banner"] == null ? [] : List<String>.from(json["banner"]!.map((x) => x)),
     categories: json["categories"] == null ? [] : List<Category>.from(json["categories"]!.map((x) => Category.fromJson(x))),
     recentOrders: json["recent_orders"] == null ? [] : List<Category>.from(json["recent_orders"]!.map((x) => Category.fromJson(x))),

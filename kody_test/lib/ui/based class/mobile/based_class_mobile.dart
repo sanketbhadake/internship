@@ -10,10 +10,9 @@ class BasedClassMobile extends StatefulWidget {
 
 class _BasedClassMobileState extends State<BasedClassMobile> {
   final item = BasedController.navigation;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-     // bottomNavigationBar: BottomNavigationBar(items:item.map((data){) ),
-    );
+    return const Scaffold();
   }
 }

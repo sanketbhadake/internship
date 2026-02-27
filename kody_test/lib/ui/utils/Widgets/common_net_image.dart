@@ -25,11 +25,12 @@ class CommonNetworkImage extends StatelessWidget {
       },
       errorBuilder: (context, error, stackTrace) {
         return Image.network(
-          "https://img.freepik.com/free-vector/colorful-round-tasty-pizza_1284-10219.jpg",height: height,
-          width: width, fit: BoxFit.cover,
+          "https://img.freepik.com/free-vector/colorful-round-tasty-pizza_1284-10219.jpg",
+          height: height,
+          width: width,
+          fit: BoxFit.cover,
         );
       },
     );
   }
 }
-

@@ -4,26 +4,26 @@ linter:
 
 
   rules:
-    # 🔥 Performance
+    #  Performance
     prefer_const_constructors: true
     prefer_const_literals_to_create_immutables: true
     prefer_final_fields: true
     prefer_final_locals: true
 
-    # 🧼 Clean Code
+    #   Clean Code
     avoid_print: true
     unnecessary_this: true
     unnecessary_import: true
     unnecessary_null_checks: true
 
-    # 🏗 Architecture
+    #   Architecture
     always_use_package_imports: true
     avoid_relative_lib_imports: true
 
-    # 🐞 Bug Prevention
+    #   Bug Prevention
     use_build_context_synchronously: true
     avoid_unnecessary_containers: true
     sized_box_for_whitespace: true
 
-    # ✨ Readability
+    #   Readability
     require_trailing_commas: true

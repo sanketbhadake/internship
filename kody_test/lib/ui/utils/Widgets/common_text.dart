@@ -6,12 +6,14 @@ class CommonText extends StatelessWidget {
   final Color? color;
   final FontWeight? weight;
   final bool center;
+  final bool overFlow;
 
   const CommonText({
     super.key,
     required this.text,
-      this.fontSize,
+    this.fontSize,
     this.center = false,
+    this.overFlow = false,
     this.color,
     this.weight,
   });
@@ -21,8 +23,8 @@ class CommonText extends StatelessWidget {
     return Text(
       text,
       textAlign: center ? TextAlign.center : TextAlign.start,
+      overflow: overFlow ? TextOverflow.ellipsis : null,
       style: TextStyle(
-        // fontFamily: 'Poppins',
         fontSize: fontSize,
         fontWeight: weight ?? FontWeight.w500,
         color: color ?? Colors.black,
