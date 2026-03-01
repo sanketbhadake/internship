@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kody_test/freamwork/controller/based_controller.dart';
 import 'package:kody_test/freamwork/repository/home/home_model.dart';
+import 'package:kody_test/ui/home/moible/view_all.dart';
+import 'package:kody_test/ui/home/moible/view_all_exciting_offers.dart';
 import 'package:kody_test/ui/utils/Widgets/common_button.dart';
 import 'package:kody_test/ui/utils/Widgets/common_container.dart';
 import 'package:kody_test/ui/utils/Widgets/common_net_image.dart';
@@ -37,7 +39,6 @@ class _HomeMobileState extends ConsumerState<HomeMobile> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-
         toolbarHeight: 80,
         flexibleSpace: header(),
         bottom: PreferredSize(
@@ -52,49 +53,55 @@ class _HomeMobileState extends ConsumerState<HomeMobile> {
       body: (updateState.welcome == null)
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 180),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 190),
 
-                /// carousel slider with indicator
-                carouselWidget(updateState.welcome, context, updateState),
+                  /// carousel slider with indicator
+                  carouselWidget(updateState.welcome, context, updateState),
 
-                /// categories section
-                headerText("Categories", false),
-                categories(updateState.welcome),
+                  /// categories section
+                  headerText("Categories", false,null),
+                  categories(updateState.welcome),
 
-                /// recently order section
-                headerText("Recently Ordered On MenuBox", false),
-                recentlyOrder(updateState.welcome),
+                  /// recently order section
+                  headerText("Recently Ordered On MenuBox", false,null),
+                  recentlyOrder(updateState.welcome),
 
-                /// exciting order section
-                headerText("Exciting Offers", true),
-                excitingOffer(updateState.welcome),
+                  /// exciting order section
+                  headerText("Exciting Offers", true,(){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ViewAllExcitingOffers()));
+                  }),
+                  excitingOffer(updateState.welcome),
 
-                /// spotlight section
-                headerText("In the Spotlight", true),
-                spotLight(updateState.welcome),
+                  /// spotlight section
+                  headerText("In the Spotlight", true,null),
+                  spotLight(updateState.welcome),
 
-                /// all store order section
-                headerText("All Stores", false),
-                allStore(updateState.welcome),
+                  /// all store order section
+                  headerText("All Stores", false,null),
+                  allStore(updateState.welcome),
 
-                ///view button
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: CommonButton(
-                    height: 52,
-                    title: "VIEW ALL RESTAURANTS",
-                    onTap: () {},
-                    color: Colors.black,
-                    txtColor: Colors.white,
-                    borderRadius: 23,
+                  ///view button
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: CommonButton(
+                      height: 52,
+                      title: "VIEW ALL RESTAURANTS",
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => ViewAll()),
+                        );
+                      },
+                      color: Colors.black,
+                      txtColor: Colors.white,
+                      borderRadius: 23,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
 
       ///Bottom Navigation
       bottomNavigationBar: BottomNavigationBar(
@@ -185,7 +192,7 @@ class _HomeMobileState extends ConsumerState<HomeMobile> {
     );
   }
 
-  Widget headerText(String title, bool isShow) {
+  Widget headerText(String title, bool isShow, GestureTapCallback? tap) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Row(
@@ -194,7 +201,8 @@ class _HomeMobileState extends ConsumerState<HomeMobile> {
           const Spacer(),
           Visibility(
             visible: isShow,
-            child: const InkWell(
+            child:   InkWell(
+              onTap: tap,
               child: CommonText(text: "View ALL", weight: FontWeight.bold),
             ),
           ),
@@ -363,7 +371,8 @@ class _HomeMobileState extends ConsumerState<HomeMobile> {
   Widget excitingOffer(HomeModel? item) {
     return SizedBox(
       height: 250,
-      child: GridView.builder(
+      child:
+      GridView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
